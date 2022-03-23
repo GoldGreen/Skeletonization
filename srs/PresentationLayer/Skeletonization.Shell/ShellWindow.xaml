@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Shell"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Prism;assembly=Skeletonization.Shared"
     Title="Скелетизация"
     Width="800"
     Height="450"
@@ -17,7 +19,7 @@
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
     <TabControl Style="{StaticResource MaterialDesignAppBarTabControl}">
-        <TabItem Header="Обнаружение" />
+        <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Detection}" Header="Обнаружение" />
         <TabItem Header="Зоны" />
         <TabItem Header="Люди" />
         <TabItem Header="Конструктор" />
