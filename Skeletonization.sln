@@ -15,7 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossfulLayer", "CrossfulLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Shared", "srs\PresentationLayer\Skeletonization.Shared\Skeletonization.Shared.csproj", "{65248C0F-BC79-465A-B261-23DBB09ACB41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Detection", "srs\PresentationLayer\Skeletonization.Detection\Skeletonization.Detection.csproj", "{C25F04D1-220D-4663-A273-E4276376A130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Detection", "srs\PresentationLayer\Skeletonization.Detection\Skeletonization.Detection.csproj", "{C25F04D1-220D-4663-A273-E4276376A130}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.CrossfulLayer", "srs\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj", "{0D58763F-2D1C-4471-94E2-11C1C0D86531}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.DataLayer", "srs\DataLayer\Skeletonization.DataLayer\Skeletonization.DataLayer.csproj", "{BCB8A227-BC17-4435-B93F-4C11F3EDF965}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{C25F04D1-220D-4663-A273-E4276376A130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C25F04D1-220D-4663-A273-E4276376A130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C25F04D1-220D-4663-A273-E4276376A130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +55,8 @@ Global
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{65248C0F-BC79-465A-B261-23DBB09ACB41} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{C25F04D1-220D-4663-A273-E4276376A130} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
+		{0D58763F-2D1C-4471-94E2-11C1C0D86531} = {32313F1C-18D5-45C5-BF2D-17220CFD85F1}
+		{BCB8A227-BC17-4435-B93F-4C11F3EDF965} = {B12014BE-E11F-4E7D-A780-9CEBDC301FE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D59C5A5-0385-40B1-B0E1-5E92A4756872}

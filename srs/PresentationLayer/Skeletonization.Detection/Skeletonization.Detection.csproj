@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
+    <PackageReference Include="ReactiveUI.Fody" Version="16.4.15" />
+    <PackageReference Include="ReactiveUI.WPF" Version="16.4.15" />
   </ItemGroup>
 
   <ItemGroup>

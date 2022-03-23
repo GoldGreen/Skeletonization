@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Skeletonization.DataLayer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj" />
+  </ItemGroup>
+
+</Project>
