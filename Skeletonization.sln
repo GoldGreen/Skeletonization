@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "PresentationLayer", "{5ECDE18A-E8E1-40B0-8638-D468469029AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Shell", "srs\PresentationLayer\Skeletonization.Shell\Skeletonization.Shell.csproj", "{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLayer", "BusinessLayer", "{A05C85A6-7234-4B7E-B5AD-4C882BDC1828}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{B12014BE-E11F-4E7D-A780-9CEBDC301FE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossfulLayer", "CrossfulLayer", "{32313F1C-18D5-45C5-BF2D-17220CFD85F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D59C5A5-0385-40B1-B0E1-5E92A4756872}
+	EndGlobalSection
+EndGlobal
