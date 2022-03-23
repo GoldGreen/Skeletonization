@@ -7,4 +7,8 @@
     <RootNamespace>Skeletonization.PresentationLayer.Shell</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Skeletonization.Shared\Skeletonization.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

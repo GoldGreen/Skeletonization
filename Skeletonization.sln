@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossfulLayer", "CrossfulLayer", "{32313F1C-18D5-45C5-BF2D-17220CFD85F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Shared", "srs\PresentationLayer\Skeletonization.Shared\Skeletonization.Shared.csproj", "{65248C0F-BC79-465A-B261-23DBB09ACB41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65248C0F-BC79-465A-B261-23DBB09ACB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65248C0F-BC79-465A-B261-23DBB09ACB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65248C0F-BC79-465A-B261-23DBB09ACB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65248C0F-BC79-465A-B261-23DBB09ACB41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
+		{65248C0F-BC79-465A-B261-23DBB09ACB41} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D59C5A5-0385-40B1-B0E1-5E92A4756872}

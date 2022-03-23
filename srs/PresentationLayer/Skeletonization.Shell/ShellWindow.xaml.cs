@@ -2,9 +2,9 @@
 
 namespace Skeletonization.PresentationLayer.Shell
 {
-    public partial class MainWindow : Window
+    public partial class ShellWindow : Window
     {
-        public MainWindow()
+        public ShellWindow()
         {
             InitializeComponent();
         }
