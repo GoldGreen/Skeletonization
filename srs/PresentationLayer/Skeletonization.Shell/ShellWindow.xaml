@@ -20,9 +20,9 @@
     mc:Ignorable="d">
     <TabControl Style="{StaticResource MaterialDesignAppBarTabControl}">
         <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Detection}" Header="Обнаружение" />
-        <TabItem Header="Зоны" />
-        <TabItem Header="Люди" />
-        <TabItem Header="Конструктор" />
-        <TabItem Header="Настройки" />
+        <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Zones}" Header="Зоны" />
+        <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Humans}" Header="Люди" />
+        <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Constructor}" Header="Конструктор" />
+        <TabItem prism:RegionManager.RegionName="{x:Static sh:GlobalRegions.Settings}" Header="Настройки" />
     </TabControl>
 </Window>

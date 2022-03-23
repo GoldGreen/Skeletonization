@@ -13,8 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Skeletonization.Constructor\Skeletonization.Constructor.csproj" />
     <ProjectReference Include="..\Skeletonization.Detection\Skeletonization.Detection.csproj" />
+    <ProjectReference Include="..\Skeletonization.Humans\Skeletonization.Humans.csproj" />
+    <ProjectReference Include="..\Skeletonization.Settings\Skeletonization.Settings.csproj" />
     <ProjectReference Include="..\Skeletonization.Shared\Skeletonization.Shared.csproj" />
+    <ProjectReference Include="..\Skeletonization.Zones\Skeletonization.Zones.csproj" />
   </ItemGroup>
 
 </Project>

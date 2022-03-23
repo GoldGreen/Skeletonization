@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataLayer\Skeletonization.DataLayer\Skeletonization.DataLayer.csproj" />
+    <ProjectReference Include="..\..\BusinessLayer\Skeletonization.BusinessLayer\Skeletonization.BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>
