@@ -9,17 +9,11 @@ namespace Skeletonization.DataLayer.Reading.Implementations.Reading
 {
     internal class VideoReader : IVideoReader
     {
-        private IVideoCaptureFabric _videoCaptureFabric;
         private VideoCapture _videoCapture;
 
-        public void SetVideoCaptureFabric(IVideoCaptureFabric videoCaptureFabric)
+        public async void Start(IVideoCaptureFabric videoCaptureFabric,Func<Mat, Task> changingCallback, Action<Size> captureLoaded)
         {
-            _videoCaptureFabric = videoCaptureFabric;
-        }
-
-        public async void Start(Func<Mat, Task> changingCallback, Action<Size> captureLoaded)
-        {
-            _videoCapture = _videoCaptureFabric.Create();
+            _videoCapture = videoCaptureFabric.Create();
             captureLoaded(new(_videoCapture.Width, _videoCapture.Height));
 
             await Task.Run(async () =>

@@ -1,7 +1,7 @@
 ﻿using Emgu.CV;
 using Skeletonization.DataLayer.Abstractions;
 
-namespace Skeletonization.DataLayer.Implementations.Reading
+namespace Skeletonization.DataLayer.Reading.Implementations.Reading
 {
     public class VideoCaptureFileFabric : IVideoCaptureFabric
     {

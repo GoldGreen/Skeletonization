@@ -8,7 +8,6 @@ namespace Skeletonization.DataLayer.Reading.Abstractions
 {
     public interface IVideoReader
     {
-        void SetVideoCaptureFabric(IVideoCaptureFabric videoCaptureFabric);
-        void Start(Func<Mat, Task> changingCallback, Action<Size> captureLoaded);
+        void Start(IVideoCaptureFabric videoCaptureFabric, Func<Mat, Task> changingCallback, Action<Size> captureLoaded);
     }
 }

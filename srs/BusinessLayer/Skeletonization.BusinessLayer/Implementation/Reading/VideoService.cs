@@ -1,12 +1,9 @@
-﻿using Emgu.CV;
-using Skeletonization.BusinessLayer.Abstractions;
+﻿using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossfulLayer.Exceptions;
 using Skeletonization.DataLayer.Abstractions;
-using Skeletonization.DataLayer.Implementations.Reading;
 using Skeletonization.DataLayer.Reading.Abstractions;
-using System;
-using System.Threading.Tasks;
+using Skeletonization.DataLayer.Reading.Implementations.Reading;
 
 namespace Skeletonization.BusinessLayer.Implementation.Reading
 {
@@ -36,8 +33,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
                 _ => throw new VideoCaptureFabricException(fabricType)
             };
 
-            VideoReader.SetVideoCaptureFabric(fabric);
-            VideoReader.Start(handler.HandleFrame, handler.HandleVideoInformation);
+            VideoReader.Start(fabric, handler.HandleFrame, handler.HandleVideoInformation);
         }
 
         public void StartFile(string filePath, IVideoProcessingHandler handler)
