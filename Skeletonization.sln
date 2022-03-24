@@ -11,25 +11,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{B12014BE-E11F-4E7D-A780-9CEBDC301FE8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossfulLayer", "CrossfulLayer", "{32313F1C-18D5-45C5-BF2D-17220CFD85F1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossLayer", "CrossLayer", "{32313F1C-18D5-45C5-BF2D-17220CFD85F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Shared", "srs\PresentationLayer\Skeletonization.Shared\Skeletonization.Shared.csproj", "{65248C0F-BC79-465A-B261-23DBB09ACB41}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Detection", "srs\PresentationLayer\Skeletonization.Detection\Skeletonization.Detection.csproj", "{C25F04D1-220D-4663-A273-E4276376A130}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.CrossfulLayer", "srs\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj", "{0D58763F-2D1C-4471-94E2-11C1C0D86531}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.DataLayer", "srs\DataLayer\Skeletonization.DataLayer\Skeletonization.DataLayer.csproj", "{BCB8A227-BC17-4435-B93F-4C11F3EDF965}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.BusinessLayer", "srs\BusinessLayer\Skeletonization.BusinessLayer\Skeletonization.BusinessLayer.csproj", "{0361BA4D-D90D-427F-BF21-861A63488A4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.BusinessLayer", "srs\BusinessLayer\Skeletonization.BusinessLayer\Skeletonization.BusinessLayer.csproj", "{0361BA4D-D90D-427F-BF21-861A63488A4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Zones", "srs\PresentationLayer\Skeletonization.Zones\Skeletonization.Zones.csproj", "{3A155F4E-D7A0-4A01-9701-6B915AC1BDE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Zones", "srs\PresentationLayer\Skeletonization.Zones\Skeletonization.Zones.csproj", "{3A155F4E-D7A0-4A01-9701-6B915AC1BDE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Humans", "srs\PresentationLayer\Skeletonization.Humans\Skeletonization.Humans.csproj", "{84E17C47-A829-45F0-A143-9ABDBD88BA06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Humans", "srs\PresentationLayer\Skeletonization.Humans\Skeletonization.Humans.csproj", "{84E17C47-A829-45F0-A143-9ABDBD88BA06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Constructor", "srs\PresentationLayer\Skeletonization.Constructor\Skeletonization.Constructor.csproj", "{E5159FCD-B7DB-4F56-8BA5-E89496891258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Constructor", "srs\PresentationLayer\Skeletonization.Constructor\Skeletonization.Constructor.csproj", "{E5159FCD-B7DB-4F56-8BA5-E89496891258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skeletonization.Settings", "srs\PresentationLayer\Skeletonization.Settings\Skeletonization.Settings.csproj", "{C4D5EB72-C054-4DB1-AC28-C60458A71DDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.Settings", "srs\PresentationLayer\Skeletonization.Settings\Skeletonization.Settings.csproj", "{C4D5EB72-C054-4DB1-AC28-C60458A71DDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skeletonization.CrossLayer", "srs\CrossLayer\Skeletonization.CrossLayer\Skeletonization.CrossLayer.csproj", "{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		{C25F04D1-220D-4663-A273-E4276376A130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C25F04D1-220D-4663-A273-E4276376A130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C25F04D1-220D-4663-A273-E4276376A130}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D58763F-2D1C-4471-94E2-11C1C0D86531}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCB8A227-BC17-4435-B93F-4C11F3EDF965}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +73,10 @@ Global
 		{C4D5EB72-C054-4DB1-AC28-C60458A71DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D5EB72-C054-4DB1-AC28-C60458A71DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D5EB72-C054-4DB1-AC28-C60458A71DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,13 +85,13 @@ Global
 		{BF4F5E44-97D9-47B2-A307-FAAB4BE7C711} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{65248C0F-BC79-465A-B261-23DBB09ACB41} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{C25F04D1-220D-4663-A273-E4276376A130} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
-		{0D58763F-2D1C-4471-94E2-11C1C0D86531} = {32313F1C-18D5-45C5-BF2D-17220CFD85F1}
 		{BCB8A227-BC17-4435-B93F-4C11F3EDF965} = {B12014BE-E11F-4E7D-A780-9CEBDC301FE8}
 		{0361BA4D-D90D-427F-BF21-861A63488A4E} = {A05C85A6-7234-4B7E-B5AD-4C882BDC1828}
 		{3A155F4E-D7A0-4A01-9701-6B915AC1BDE6} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{84E17C47-A829-45F0-A143-9ABDBD88BA06} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{E5159FCD-B7DB-4F56-8BA5-E89496891258} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
 		{C4D5EB72-C054-4DB1-AC28-C60458A71DDF} = {5ECDE18A-E8E1-40B0-8638-D468469029AF}
+		{A384F8DD-47F3-42FB-B340-D0C2F95B5CB0} = {32313F1C-18D5-45C5-BF2D-17220CFD85F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D59C5A5-0385-40B1-B0E1-5E92A4756872}

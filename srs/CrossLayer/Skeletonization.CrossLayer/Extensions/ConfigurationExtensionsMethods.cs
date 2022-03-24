@@ -2,7 +2,7 @@
 using Prism.Ioc;
 using System.IO;
 
-namespace Skeletonization.CrossfulLayer.Extensions
+namespace Skeletonization.CrossLayer.Extensions
 {
     public static class ConfigurationExtensionsMethods
     {

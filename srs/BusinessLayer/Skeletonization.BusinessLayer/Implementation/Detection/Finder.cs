@@ -1,6 +1,6 @@
 ﻿using Emgu.CV;
 using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
+using Skeletonization.CrossLayer.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

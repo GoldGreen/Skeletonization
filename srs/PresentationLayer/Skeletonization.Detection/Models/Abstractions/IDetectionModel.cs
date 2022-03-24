@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using Skeletonization.CrossfulLayer.Data;
+using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
 using System.Collections.ObjectModel;
 
@@ -9,6 +9,5 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Abstractions
     {
         byte[] FrameBytes { get; set; }
         ObservableCollection<Zone> Zones { get; }
-        Size VideoSize { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
-using Skeletonization.CrossfulLayer.Exceptions;
+using Skeletonization.CrossLayer.Data;
+using Skeletonization.CrossLayer.Exceptions;
 using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.DataLayer.Reading.Abstractions;
 using Skeletonization.DataLayer.Reading.Implementations.Reading;
@@ -14,6 +14,12 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
         public VideoService(IVideoReader videoReader)
         {
             VideoReader = videoReader;
+        }
+
+        public bool ReversePause()
+        {
+            VideoReader.Paused = !VideoReader.Paused;
+            return VideoReader.Paused;
         }
 
         private void Start(VideoCaptureFabricType fabricType, object arg, IVideoProcessingHandler handler)

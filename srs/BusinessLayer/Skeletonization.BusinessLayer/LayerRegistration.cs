@@ -4,7 +4,7 @@ using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.BusinessLayer.Configuration;
 using Skeletonization.BusinessLayer.Implementation.Detection;
 using Skeletonization.BusinessLayer.Implementation.Reading;
-using Skeletonization.CrossfulLayer.Extensions;
+using Skeletonization.CrossLayer.Extensions;
 
 namespace Skeletonization.BusinessLayer
 {

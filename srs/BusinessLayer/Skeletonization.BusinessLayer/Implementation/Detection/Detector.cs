@@ -4,7 +4,7 @@ using Emgu.CV.Dnn;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Extensions;
+using Skeletonization.CrossLayer.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

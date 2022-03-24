@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj" />
+    <Folder Include="Implementations\DatabaseSending\" />
+    <Folder Include="Implementations\TeamsSending\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\DatabaseSending\" />
-    <Folder Include="Implementations\TeamsSending\" />
+    <ProjectReference Include="..\..\CrossLayer\Skeletonization.CrossLayer\Skeletonization.CrossLayer.csproj" />
   </ItemGroup>
 
 </Project>

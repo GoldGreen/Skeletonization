@@ -1,7 +1,7 @@
-﻿using Skeletonization.CrossfulLayer.Data;
+﻿using Skeletonization.CrossLayer.Data;
 using System.Collections.Generic;
 
-namespace Skeletonization.CrossfulLayer.Extensions
+namespace Skeletonization.CrossLayer.Extensions
 {
     public static class BodyPartsExtensionsMethods
     {

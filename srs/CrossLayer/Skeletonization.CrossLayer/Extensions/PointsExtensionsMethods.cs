@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 
-namespace Skeletonization.CrossfulLayer.Extensions
+namespace Skeletonization.CrossLayer.Extensions
 {
     public static class PointsExtensionsMethods
     {

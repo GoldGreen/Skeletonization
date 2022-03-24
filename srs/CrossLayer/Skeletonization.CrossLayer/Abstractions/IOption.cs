@@ -1,4 +1,4 @@
-﻿namespace Skeletonization.CrossfulLayer.Abstractions
+﻿namespace Skeletonization.CrossLayer.Abstractions
 {
     public interface IOption
     {

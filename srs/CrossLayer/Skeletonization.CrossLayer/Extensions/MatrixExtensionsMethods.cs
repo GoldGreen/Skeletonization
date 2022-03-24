@@ -2,7 +2,7 @@
 using Emgu.CV.Util;
 using System.Runtime.CompilerServices;
 
-namespace Skeletonization.CrossfulLayer.Extensions
+namespace Skeletonization.CrossLayer.Extensions
 {
     public static class MatrixExtensionsMethods
     {

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj" />
     <ProjectReference Include="..\..\DataLayer\Skeletonization.DataLayer\Skeletonization.DataLayer.csproj" />
   </ItemGroup>
 

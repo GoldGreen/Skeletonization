@@ -1,7 +1,7 @@
-﻿using Skeletonization.CrossfulLayer.Data;
+﻿using Skeletonization.CrossLayer.Data;
 using System;
 
-namespace Skeletonization.CrossfulLayer.Exceptions
+namespace Skeletonization.CrossLayer.Exceptions
 {
     public class VideoCaptureFabricException : Exception
     {

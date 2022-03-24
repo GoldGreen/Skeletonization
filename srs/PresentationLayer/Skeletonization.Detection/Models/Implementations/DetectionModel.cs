@@ -2,8 +2,8 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
-using Skeletonization.CrossfulLayer.Extensions;
+using Skeletonization.CrossLayer.Data;
+using Skeletonization.CrossLayer.Extensions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
 using System.Collections.Generic;
@@ -20,7 +20,6 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         public ObservableCollection<Zone> Zones { get; } = new();
         [Reactive] public byte[] FrameBytes { get; set; }
 
-        [Reactive] public Size VideoSize { get; set; }
         [Reactive] public IEnumerable<Human> Humans { get; set; }
 
         public DetectionModel(IVideoService videoService, IFinder finder)
@@ -39,7 +38,6 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
         public void HandleVideoInformation(Size size)
         {
-            VideoSize = size;
             Init();
         }
 

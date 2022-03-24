@@ -1,5 +1,5 @@
 ﻿
-namespace Skeletonization.CrossfulLayer.Data
+namespace Skeletonization.CrossLayer.Data
 {
     public class BodyPartPoint
     {

@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Skeletonization.CrossfulLayer.Data;
+using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Abstractions;
 using System;
 using System.Collections.Generic;

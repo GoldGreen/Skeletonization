@@ -8,7 +8,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using D = Skeletonization.CrossfulLayer.Data;
+using D = Skeletonization.CrossLayer.Data;
 
 namespace Skeletonization.PresentationLayer.Detection.Views
 {

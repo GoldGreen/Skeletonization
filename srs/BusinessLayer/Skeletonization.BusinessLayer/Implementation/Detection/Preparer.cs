@@ -1,7 +1,7 @@
 ﻿using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
+using Skeletonization.CrossLayer.Data;
 using System;
-using static Skeletonization.CrossfulLayer.Extensions.PointsExtensionsMethods;
+using static Skeletonization.CrossLayer.Extensions.PointsExtensionsMethods;
 using Dr = System.Drawing;
 
 namespace Skeletonization.BusinessLayer.Implementation.Detection

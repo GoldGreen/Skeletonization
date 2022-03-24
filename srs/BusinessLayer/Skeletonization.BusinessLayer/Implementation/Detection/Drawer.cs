@@ -2,8 +2,8 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
-using Skeletonization.CrossfulLayer.Extensions;
+using Skeletonization.CrossLayer.Data;
+using Skeletonization.CrossLayer.Extensions;
 using System.Linq;
 using Dr = System.Drawing;
 
