@@ -20,5 +20,7 @@
     <ProjectReference Include="..\Skeletonization.Shared\Skeletonization.Shared.csproj" />
     <ProjectReference Include="..\Skeletonization.Zones\Skeletonization.Zones.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<None Include="appsettings.json" CopyToOutputDirectory="Always" />
+	</ItemGroup>
 </Project>

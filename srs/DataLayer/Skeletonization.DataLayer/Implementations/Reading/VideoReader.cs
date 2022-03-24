@@ -3,7 +3,7 @@ using Skeletonization.DataLayer.Reading.Abstractions;
 using System;
 using System.Threading.Tasks;
 
-namespace Skeletonization.DataLayer.Reading.Implementations
+namespace Skeletonization.DataLayer.Reading.Implementations.Reading
 {
     internal class VideoReader : IVideoReader
     {

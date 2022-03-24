@@ -9,4 +9,9 @@
     <ProjectReference Include="..\..\CrossfulLayer\Skeletonization.CrossfulLayer\Skeletonization.CrossfulLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Implementations\DatabaseSending\" />
+    <Folder Include="Implementations\TeamsSending\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Prism.Ioc;
 using Skeletonization.DataLayer.Reading.Abstractions;
-using Skeletonization.DataLayer.Reading.Implementations;
+using Skeletonization.DataLayer.Reading.Implementations.Reading;
 
 namespace Skeletonization.DataLayer.Reading
 {
