@@ -1,29 +1,56 @@
-﻿using ReactiveUI;
+﻿using Emgu.CV;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.BusinessLayer.Abstractions;
+using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossfulLayer.Extensions;
-using Skeletonization.DataLayer.Reading.Abstractions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+using Skeletonization.PresentationLayer.Shared.Data;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 {
-    internal class DetectionModel : ReactiveObject, IDetectionModel
+    internal class DetectionModel : ReactiveObject, IDetectionModel, IVideoProcessingHandler
     {
-        public IVideoReader VideoReader { get; }
+        public IVideoService VideoService { get; }
         public IFinder Finder { get; }
 
-        [Reactive] public byte[] Frame { get; set; }
+        public ObservableCollection<Zone> Zones { get; } = new();
+        [Reactive] public byte[] FrameBytes { get; set; }
 
-        public DetectionModel(IVideoReader videoReader, IFinder finder)
+        [Reactive] public Size VideoSize { get; set; }
+        [Reactive] public IEnumerable<Human> Humans { get; set; }
+
+        public DetectionModel(IVideoService videoService, IFinder finder)
         {
-            VideoReader = videoReader;
+            VideoService = videoService;
             Finder = finder;
-            VideoReader.Start(async mat =>
-            {
-                using var copy = mat.Clone();
-                var persons = await Finder.Find(copy, copy);
-                Frame = copy.ToBytes();
-            });
+
+            VideoService.StartCamera(0, this);
+        }
+
+        public async Task HandleFrame(Mat mat)
+        {
+            using var copy = mat.Clone();
+            FrameBytes = copy.ToBytes();
+        }
+
+        public void HandleVideoInformation(Size size)
+        {
+            VideoSize = size;
+            Init();
+        }
+
+        private async void Init()
+        {
+            await Task.Delay(1000);
+            Zones.Add(new(0, 0, 0.1, 0.1));
+            await Task.Delay(1000);
+            Zones.Add(new(0, 0.05, 0.1, 0.1));
+            await Task.Delay(1000);
+            Zones.Add(new(0, 0.05, 0.1, 0.1));
         }
     }
 }

@@ -22,8 +22,4 @@
     <ProjectReference Include="..\..\BusinessLayer\Skeletonization.BusinessLayer\Skeletonization.BusinessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

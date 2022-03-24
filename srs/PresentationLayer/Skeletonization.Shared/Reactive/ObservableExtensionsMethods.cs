@@ -74,5 +74,15 @@ namespace Skeletonization.PresentationLayer.Shared.Reactive
                 act => uIElement.MouseLeftButtonDown -= act
             );
         }
+
+        public static IObservable<SizeChangedEventArgs> SizeChangedObservable(this FrameworkElement uIElement)
+        {
+            return Observable.FromEvent<SizeChangedEventHandler, SizeChangedEventArgs>
+            (
+                act => (sender, e) => act(e),
+                act => uIElement.SizeChanged += act,
+                act => uIElement.SizeChanged -= act
+            );
+        }
     }
 }

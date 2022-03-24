@@ -5,12 +5,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Detection.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
+    xmlns:shD="clr-namespace:Skeletonization.PresentationLayer.Shared.Data;assembly=Skeletonization.Shared"
     xmlns:vm="clr-namespace:Skeletonization.PresentationLayer.Detection.ViewModels"
+    x:Name="control"
     d:DataContext="{d:DesignInstance Type=vm:DetectionViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
-        <Image Source="{Binding Model.Frame}" Stretch="Uniform" />
+    <Grid Background="White">
+        <Image
+            x:Name="image"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Source="{Binding Model.FrameBytes}"
+            Stretch="Uniform" />
+        <Canvas
+            Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}"
+            Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="Transparent">
+            <Canvas.Resources>
+                <Style TargetType="local:ZonePoint">
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="Fill" Value="Red" />
+                </Style>
+                <Style TargetType="local:ZonePolygon">
+                    <Setter Property="Opacity" Value="0.4" />
+                    <Setter Property="Fill" Value="Red" />
+                </Style>
+            </Canvas.Resources>
+            <local:ZonesMapper Zones="{Binding Model.Zones}">
+                <local:ZonesMapper.DataTemplates>
+                    <DataTemplate>
+                        <local:ZonePolygon d:DataContext="{d:DesignInstance Type=shD:Zone}" Zone="{Binding}" />
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                    </DataTemplate>
+                    <DataTemplate>
+                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                    </DataTemplate>
+                </local:ZonesMapper.DataTemplates>
+            </local:ZonesMapper>
+        </Canvas>
     </Grid>
 </UserControl>

@@ -3,6 +3,7 @@ using Prism.Ioc;
 using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.BusinessLayer.Configuration;
 using Skeletonization.BusinessLayer.Implementation.Detection;
+using Skeletonization.BusinessLayer.Implementation.Reading;
 using Skeletonization.CrossfulLayer.Extensions;
 
 namespace Skeletonization.BusinessLayer
@@ -20,7 +21,8 @@ namespace Skeletonization.BusinessLayer
                      .RegisterSingleton<IPreparer, Preparer>()
                      .RegisterSingleton<IDrawer, Drawer>()
                      .RegisterSingleton<IHumanConverter, HumanConverter>()
-                     .RegisterSingleton<IFinder, Finder>();
+                     .RegisterSingleton<IFinder, Finder>()
+                     .RegisterSingleton<IVideoService, VideoService>();
         }
 
         private static void RegisterNet(this IContainerRegistry container)
