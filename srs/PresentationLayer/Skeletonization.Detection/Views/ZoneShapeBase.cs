@@ -21,6 +21,21 @@ namespace Skeletonization.PresentationLayer.Detection.Views
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoneShapeBase), new FrameworkPropertyMetadata(typeof(ZoneShapeBase)));
         }
 
+        public ZoneShapeBase()
+        {
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         protected Point ToParent(Point point)
         {
             var parent = Parent as Panel;

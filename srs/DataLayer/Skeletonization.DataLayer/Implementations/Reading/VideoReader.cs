@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.DataLayer.Reading.Abstractions;
@@ -30,13 +31,14 @@ namespace Skeletonization.DataLayer.Reading.Implementations.Reading
         }
         private bool _paused;
 
-        public async void Start(IVideoCaptureFabric videoCaptureFabric, Func<Mat, Task> changingCallback, Action<Size> captureLoaded)
+        public async void Start(IVideoCaptureFabric videoCaptureFabric, Func<FrameInfo, Task> changingCallback, Action<VideoInfo> captureLoaded)
         {
             _videoCapture = videoCaptureFabric.Create();
             captureLoaded(new(_videoCapture.Width, _videoCapture.Height));
 
             await Task.Run(async () =>
             {
+                int frameNum = 0;
                 while (true)
                 {
                     if (Paused)
@@ -45,14 +47,14 @@ namespace Skeletonization.DataLayer.Reading.Implementations.Reading
                         continue;
                     }
 
-                    using Mat frame = new();
+                    Mat frame = new();
 
                     if (!_videoCapture.Read(frame))
                     {
                         break;
                     }
 
-                    await changingCallback(frame);
+                    await changingCallback(new FrameInfo(frame, frameNum++));
                 }
             });
             _videoCapture.Dispose();

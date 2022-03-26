@@ -29,7 +29,7 @@ namespace Skeletonization.PresentationLayer.Detection.Views
         public static readonly DependencyProperty ZoneProperty =
            DependencyProperty.Register(nameof(Zone),
                                        typeof(Zone),
-                                       typeof(ZonePolygon), new(ZoneChangedCallback));
+                                       typeof(ZonePolygon));
 
         public static readonly DependencyProperty PointsProperty =
           DependencyProperty.Register(nameof(Points),
@@ -49,35 +49,19 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                 new FrameworkPropertyMetadata(typeof(ZonePolygon)));
         }
 
-        private static void ZoneChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (d is not ZonePolygon z)
-            {
-                return;
-            }
+            var resizing = (Parent as Panel).SizeChangedObservable()
+                                              .Select(_ => Zone.Points);
 
-            z._pointsSub?.Dispose();
-
-            var resizing = (z.Parent as Panel).SizeChangedObservable()
-                                              .Select(_ => z.Zone.Points);
-
-            z._pointsSub = z.Zone.WhenAnyValue(x => x.Points)
+            _pointsSub = Zone.WhenAnyValue(x => x.Points)
                                  .Merge(resizing)
                                  .Select(x => x.Select(x => new Point(x.X, x.Y)))
-                                 .Select(x => x.Select(z.ToParent))
+                                 .Select(x => x.Select(ToParent))
                                  .Select(x => new PointCollection(x))
-                                 .Subscribe(x => z.Points = x);
-        }
-
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
-        {
-            base.OnVisualParentChanged(oldParent);
-
-            _movingSub?.Dispose();
-            _draggingSub?.Dispose();
+                                 .Subscribe(x => Points = x);
 
             var parent = Parent as Panel;
-
             _movingSub = parent.MouseMoveObservable()
                                .Where(_ => _isDragging)
                                .Select(x =>
@@ -109,5 +93,11 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                         .Subscribe(x => _isDragging = x);
         }
 
+        protected override void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _movingSub?.Dispose();
+            _draggingSub?.Dispose();
+            _pointsSub?.Dispose();
+        }
     }
 }

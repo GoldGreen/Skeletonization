@@ -30,14 +30,8 @@ namespace Skeletonization.PresentationLayer.Detection.Views
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZonePoint), new FrameworkPropertyMetadata(typeof(ZonePoint)));
         }
 
-        protected override void OnVisualParentChanged(DependencyObject oldParent)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            base.OnVisualParentChanged(oldParent);
-
-            _movingSub?.Dispose();
-            _draggingSub?.Dispose();
-            _parentSizeChanged?.Dispose();
-
             var parent = Parent as Panel;
 
             _parentSizeChanged = parent.SizeChangedObservable()
@@ -57,6 +51,13 @@ namespace Skeletonization.PresentationLayer.Detection.Views
 
             _draggingSub = parentMouseUp.Merge(mouseDown)
                                         .Subscribe(x => _isDragging = x);
+        }
+
+        protected override void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _movingSub?.Dispose();
+            _draggingSub?.Dispose();
+            _parentSizeChanged?.Dispose();
         }
 
         private static void PointChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

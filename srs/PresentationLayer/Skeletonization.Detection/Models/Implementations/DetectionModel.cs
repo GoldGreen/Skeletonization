@@ -1,54 +1,83 @@
 ﻿using Emgu.CV;
+using Prism.Events;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.BusinessLayer.Abstractions;
+using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Extensions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
-using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.PresentationLayer.Shared.Prism;
+using Skeletonization.PresentationLayer.Shared.Reactive;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 {
-    internal class DetectionModel : ReactiveObject, IDetectionModel, IVideoProcessingHandler
+    internal class DetectionModel : ReactiveObject, IDetectionModel
     {
         public IVideoService VideoService { get; }
         public IFinder Finder { get; }
+        public IEventAggregator EventAggregator { get; set; }
 
-        public ObservableCollection<Zone> Zones { get; } = new();
+        [Reactive] public int FrameNum { get; set; }
+        [Reactive] public long FrameHandlingTime { get; set; }
+        [Reactive] public string VideoDescription { get; set; }
+
+        [Reactive] public Mat Frame { get; set; }
         [Reactive] public byte[] FrameBytes { get; set; }
 
         [Reactive] public IEnumerable<Human> Humans { get; set; }
 
-        public DetectionModel(IVideoService videoService, IFinder finder)
+        public DetectionModel(IVideoService videoService,
+                              IFinder finder,
+                              IEventAggregator eventAggregator)
         {
             VideoService = videoService;
             Finder = finder;
+            EventAggregator = eventAggregator;
 
-            VideoService.StartCamera(0, this);
+            this.WhenAnyValue(x => x.Frame)
+                .WhereNotNull()
+                .Do(x => FrameBytes = x.ToBytes())
+                .Subscribe(EventAggregator.GetEvent<FrameChanged>().Publish)
+                .Cashe();
         }
 
-        public async Task HandleFrame(Mat mat)
+        public void StartVideoFromCamera(int cameraId)
         {
-            using var copy = mat.Clone();
-            FrameBytes = copy.ToBytes();
+            VideoService.StartCamera(cameraId, this);
+            VideoDescription = $"Камера: {cameraId}";
         }
 
-        public void HandleVideoInformation(Size size)
+        public void StartVideoFromFile(string fileName)
         {
-            Init();
+            VideoService.StartFile(fileName, this);
+            VideoDescription = $"Файл: {fileName}";
         }
 
-        private async void Init()
+        public Task HandleFrame(FrameInfo frame)
         {
-            await Task.Delay(1000);
-            Zones.Add(new(0, 0, 0.1, 0.1));
-            await Task.Delay(1000);
-            Zones.Add(new(0, 0.05, 0.1, 0.1));
-            await Task.Delay(1000);
-            Zones.Add(new(0, 0.05, 0.1, 0.1));
+            return Application.Current?.Dispatcher?.Invoke(async () =>
+            {
+                var st = Stopwatch.StartNew();
+
+                await Task.Delay(100);
+                Frame?.Dispose();
+                Frame = null;
+                Frame = frame.Mat;
+
+                FrameNum = frame.Num;
+                FrameHandlingTime = st.ElapsedMilliseconds;
+            });
+        }
+
+        public void HandleVideoInformation(VideoInfo size)
+        {
         }
     }
 }

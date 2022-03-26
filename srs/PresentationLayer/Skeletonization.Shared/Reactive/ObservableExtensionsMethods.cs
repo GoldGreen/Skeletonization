@@ -1,9 +1,11 @@
-﻿using ReactiveUI;
+﻿using Prism.Events;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -28,21 +30,46 @@ namespace Skeletonization.PresentationLayer.Shared.Reactive
                              .Repeat();
         }
 
-        public static IObservable<T> ToObservable<T>(this ObservableCollection<T> collection, NotifyCollectionChangedAction action)
+        public static IObservable<(NotifyCollectionChangedAction action, T el)> ToObservable<T>(this ObservableCollection<T> collection)
         {
             return Observable.FromEvent<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>
             (
                 act => (sender, e) => act(e),
                 act => collection.CollectionChanged += act,
                 act => collection.CollectionChanged -= act
-            ).Where(x => x.Action == action)
+            )
             .Select(x => x.Action switch
             {
-                NotifyCollectionChangedAction.Add => x.NewItems,
-                NotifyCollectionChangedAction.Remove => x.OldItems,
-                _ => null
+                NotifyCollectionChangedAction.Add => (x.Action, items: x.NewItems),
+                NotifyCollectionChangedAction.Remove => (x.Action, items: x.OldItems),
+                _ => default
             }).WhereNotNull()
-            .SelectMany(x => x.Cast<T>());
+            .SelectMany(x => x.items.Cast<T>().Select(y => (x.Action, y)));
+        }
+
+        public static IObservable<T> ToObservable<T>(this ObservableCollection<T> collection, NotifyCollectionChangedAction action)
+        {
+            return collection.ToObservable()
+                             .Where(x => x.action == action)
+                             .Select(x => x.el);
+        }
+
+        public static IObservable<T> ToObservable<T>(this PubSubEvent<T> pubSub)
+        {
+            return Observable.FromEvent<T>
+            (
+                act => pubSub.Subscribe(act),
+                act => pubSub.Unsubscribe(act)
+            );
+        }
+
+        public static IObservable<Unit> ToObservable(this PubSubEvent pubSub)
+        {
+            return Observable.FromEvent
+            (
+                act => pubSub.Subscribe(act),
+                act => pubSub.Unsubscribe(act)
+            );
         }
 
         public static IObservable<MouseEventArgs> MouseMoveObservable(this UIElement uIElement)

@@ -17,6 +17,7 @@ namespace Skeletonization.PresentationLayer.Shared.Data
         [Reactive] public Point RightTop { get; set; }
         [Reactive] public Point RightBot { get; set; }
         [Reactive] public Point LeftBot { get; set; }
+        [Reactive] public byte[] FrameRoiBytes { get; set; }
 
         public extern IEnumerable<Point> Points { [ObservableAsProperty]get; }
 
@@ -42,6 +43,14 @@ namespace Skeletonization.PresentationLayer.Shared.Data
 
             ValidatePoint(this.WhenAnyValue(x => x.LeftBot))
                 .Subscribe(p => LeftBot = p);
+        }
+
+        public IEnumerable<Point> GetPoints()
+        {
+            yield return LeftTop;
+            yield return RightTop;
+            yield return RightBot;
+            yield return LeftBot;
         }
 
         public void Check(IEnumerable<Human> elements)
@@ -100,12 +109,6 @@ namespace Skeletonization.PresentationLayer.Shared.Data
             return c;
         }
 
-        private IEnumerable<Point> GetPoints()
-        {
-            yield return LeftTop;
-            yield return RightTop;
-            yield return RightBot;
-            yield return LeftBot;
-        }
+     
     }
 }

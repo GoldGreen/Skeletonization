@@ -1,4 +1,4 @@
-﻿using Emgu.CV;
+﻿using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
 using System;
@@ -9,7 +9,6 @@ namespace Skeletonization.DataLayer.Reading.Abstractions
     public interface IVideoReader
     {
         bool Paused { get; set; }
-
-        void Start(IVideoCaptureFabric videoCaptureFabric, Func<Mat, Task> changingCallback, Action<Size> captureLoaded);
+        void Start(IVideoCaptureFabric videoCaptureFabric, Func<FrameInfo, Task> changingCallback, Action<VideoInfo> captureLoaded);
     }
 }

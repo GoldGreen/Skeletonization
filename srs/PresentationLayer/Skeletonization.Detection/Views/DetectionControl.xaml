@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Detection.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
     xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
     xmlns:shD="clr-namespace:Skeletonization.PresentationLayer.Shared.Data;assembly=Skeletonization.Shared"
     xmlns:vm="clr-namespace:Skeletonization.PresentationLayer.Detection.ViewModels"
@@ -26,21 +28,54 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2">
-            <StackPanel.Resources>
-                <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock" />
-            </StackPanel.Resources>
-            <Menu Height="40" Style="{StaticResource MaterialDesignMenu}">
-                <MenuItem Header="Выбрать видеопоток">
-                    <MenuItem Header="Файл" />
-                    <MenuItem Header="Камера" />
+            <Menu Height="40">
+                <Menu.Resources>
+                    <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
+                        <Setter Property="Margin" Value="10,-6,0,0" />
+                    </Style>
+                </Menu.Resources>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Kind="VideoPlus" />
+                            <TextBlock Text="Выбрать видеопоток" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem Command="{Binding StartVideoFromFileCommand}">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="File" />
+                                <TextBlock Text="Файл" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding StartVideoFromCameraCommand}">
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="Camera" />
+                                <TextBlock Text="Камера" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <WrapPanel>
-                <TextBlock Text="Описание видео: блаблабла " />
-                <TextBlock Text="Номер кадра: 156 " />
-                <TextBlock Text="Время обработки кадра: 312мс" />
+                <WrapPanel.Resources>
+                    <Style BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" TargetType="TextBlock">
+                        <Setter Property="Margin" Value="0,0,10,0" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </WrapPanel.Resources>
+                <TextBlock Text="{Binding Model.FrameNum, StringFormat='Кадр: {0}'}" />
+                <TextBlock Text="{Binding Model.FrameHandlingTime, StringFormat='Время обработки: {0}'}" />
+                <TextBlock Text="{Binding Model.VideoDescription}" />
             </WrapPanel>
         </StackPanel>
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            BorderBrush="{StaticResource MaterialDesignBody}"
+            BorderThickness="3" />
         <Image
             x:Name="image"
             Grid.Row="1"
@@ -68,7 +103,10 @@
                     <Setter Property="Fill" Value="Red" />
                 </Style>
             </Canvas.Resources>
-            <local:ZonesMapper x:Name="mapper" Zones="{Binding Model.Zones}">
+            <local:ZonesMapper
+                x:Name="mapper"
+                SelectedZone="{Binding SelectedZone, Mode=TwoWay}"
+                Zones="{Binding Zones}">
                 <local:ZonesMapper.DataTemplates>
                     <DataTemplate>
                         <local:ZonePolygon d:DataContext="{d:DesignInstance Type=shD:Zone}" Zone="{Binding}" />
@@ -88,16 +126,9 @@
                 </local:ZonesMapper.DataTemplates>
             </local:ZonesMapper>
         </Canvas>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <UniformGrid Grid.Row="0" Rows="1">
-                <Button Content="Добавить" />
-                <Button Content="Удалить" />
-            </UniformGrid>
-            <local:ZoneControl Grid.Row="1" DataContext="{Binding SelectedZone, ElementName=mapper}" />
-        </Grid>
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="1"
+            prism:RegionManager.RegionName="{x:Static local:Regions.Zones}" />
     </Grid>
 </UserControl>

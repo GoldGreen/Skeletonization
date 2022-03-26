@@ -13,14 +13,22 @@ namespace Skeletonization.PresentationLayer.Detection
     {
         protected override void RegisterViews(IRegionManager regionManager)
         {
-            regionManager.RegisterViewWithRegion<DetectionControl>(GlobalRegions.Detection);
+            regionManager.RegisterViewWithRegion<DetectionControl>(GlobalRegions.Detection)
+                         .RegisterViewWithRegion<ZonesControl>(Regions.Zones);
         }
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IDetectionModel, DetectionModel>();
+            containerRegistry.RegisterSingleton<IZonesModel, ZonesModel>();
+
+            containerRegistry.RegisterSingleton<IZoneFactory, ZoneFactory>();
+            containerRegistry.RegisterSingleton<IVideoDevicesResolver, VideoDevicesResolver>();
+
+            containerRegistry.RegisterDialog<OpenCameraDialogControl, OpenCameraDialogViewModel>("openCameraDialog");
 
             ViewModelLocationProvider.Register<DetectionControl, DetectionViewModel>();
+            ViewModelLocationProvider.Register<ZonesControl, ZonesViewModel>();
         }
     }
 }

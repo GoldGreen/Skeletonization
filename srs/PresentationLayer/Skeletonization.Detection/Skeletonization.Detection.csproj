@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DirectShowLib" Version="1.0.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="16.4.15" />
     <PackageReference Include="ReactiveUI.WPF" Version="16.4.15" />
   </ItemGroup>

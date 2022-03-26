@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Skeletonization.PresentationLayer.Detection.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ZoneControl.xaml
+    /// Логика взаимодействия для OpenCameraDialogControl.xaml
     /// </summary>
-    public partial class ZoneControl : UserControl
+    public partial class OpenCameraDialogControl : UserControl
     {
-        public ZoneControl()
+        public OpenCameraDialogControl()
         {
             InitializeComponent();
         }
