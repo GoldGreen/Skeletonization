@@ -1,8 +1,8 @@
 ﻿using Prism.Services.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
-using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.CrossLayer.Data;
+using Skeletonization.DataLayer.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

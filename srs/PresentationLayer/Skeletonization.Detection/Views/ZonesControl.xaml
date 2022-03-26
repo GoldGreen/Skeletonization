@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Detection.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
     xmlns:vm="clr-namespace:Skeletonization.PresentationLayer.Detection.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:ZonesViewModel}"
     d:DesignHeight="708.5"
@@ -19,6 +20,9 @@
             <Button Command="{Binding AddZoneCommand}" Content="Добавить" />
             <Button Command="{Binding RemoveZoneCommand}" Content="Удалить" />
         </UniformGrid>
-        <Image Grid.Row="1" Source="{Binding Model.SelectedZone.FrameRoiBytes}" />
+        <local:ZoneControl
+            Grid.Row="1"
+            DataContext="{Binding Model.SelectedZone}"
+            IsEnabled="{Binding Converter={sh:IsNullableConverter}}" />
     </Grid>
 </UserControl>

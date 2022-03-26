@@ -1,7 +1,7 @@
-﻿using Skeletonization.PresentationLayer.Shared.Data;
+﻿using Skeletonization.CrossLayer.Data;
 using System.Collections.Generic;
 
-namespace Skeletonization.PresentationLayer.Detection.Models.Abstractions
+namespace Skeletonization.DataLayer.Abstractions
 {
     public interface IVideoDevicesResolver
     {

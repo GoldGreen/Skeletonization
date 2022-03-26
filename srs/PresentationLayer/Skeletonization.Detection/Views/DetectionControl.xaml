@@ -96,11 +96,11 @@
                 <Style TargetType="local:ZonePoint">
                     <Setter Property="Width" Value="25" />
                     <Setter Property="Height" Value="25" />
-                    <Setter Property="Fill" Value="Red" />
+                    <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
                 </Style>
                 <Style TargetType="local:ZonePolygon">
-                    <Setter Property="Opacity" Value="0.4" />
-                    <Setter Property="Fill" Value="Red" />
+                    <Setter Property="Opacity" Value="{Binding Opacity}" />
+                    <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
                 </Style>
             </Canvas.Resources>
             <local:ZonesMapper

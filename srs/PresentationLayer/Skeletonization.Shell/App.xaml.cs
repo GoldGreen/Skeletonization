@@ -3,7 +3,7 @@ using Prism.Modularity;
 using Prism.Unity;
 using Skeletonization.BusinessLayer;
 using Skeletonization.Constructor;
-using Skeletonization.DataLayer.Reading;
+using Skeletonization.DataLayer;
 using Skeletonization.Humans;
 using Skeletonization.PresentationLayer.Detection;
 using Skeletonization.Settings;

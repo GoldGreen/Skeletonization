@@ -23,7 +23,6 @@ namespace Skeletonization.PresentationLayer.Detection
             containerRegistry.RegisterSingleton<IZonesModel, ZonesModel>();
 
             containerRegistry.RegisterSingleton<IZoneFactory, ZoneFactory>();
-            containerRegistry.RegisterSingleton<IVideoDevicesResolver, VideoDevicesResolver>();
 
             containerRegistry.RegisterDialog<OpenCameraDialogControl, OpenCameraDialogViewModel>("openCameraDialog");
 

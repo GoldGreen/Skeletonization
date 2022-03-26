@@ -2,8 +2,7 @@
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Exceptions;
 using Skeletonization.DataLayer.Abstractions;
-using Skeletonization.DataLayer.Reading.Abstractions;
-using Skeletonization.DataLayer.Reading.Implementations.Reading;
+using Skeletonization.DataLayer.Implementations.Reading;
 
 namespace Skeletonization.BusinessLayer.Implementation.Reading
 {

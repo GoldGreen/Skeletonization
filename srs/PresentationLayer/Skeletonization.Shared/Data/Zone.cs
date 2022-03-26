@@ -17,9 +17,16 @@ namespace Skeletonization.PresentationLayer.Shared.Data
         [Reactive] public Point RightTop { get; set; }
         [Reactive] public Point RightBot { get; set; }
         [Reactive] public Point LeftBot { get; set; }
+        public extern IEnumerable<Point> Points { [ObservableAsProperty]get; }
+
         [Reactive] public byte[] FrameRoiBytes { get; set; }
 
-        public extern IEnumerable<Point> Points { [ObservableAsProperty]get; }
+        [Reactive] public string Name { get; set; }
+        [Reactive] public string Color { get; set; }
+        [Reactive] public double Opacity { get; set; }
+        [Reactive] public int MinCount { get; set; }
+        [Reactive] public int Delay { get; set; }
+        [Reactive] public bool CheckInside { get; set; }
 
         public Zone(double startX, double startY, double width, double height)
         {
@@ -109,6 +116,6 @@ namespace Skeletonization.PresentationLayer.Shared.Data
             return c;
         }
 
-     
+
     }
 }

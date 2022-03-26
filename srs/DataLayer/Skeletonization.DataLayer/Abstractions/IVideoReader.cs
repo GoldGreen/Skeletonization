@@ -1,10 +1,9 @@
 ﻿using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
-using Skeletonization.DataLayer.Abstractions;
 using System;
 using System.Threading.Tasks;
 
-namespace Skeletonization.DataLayer.Reading.Abstractions
+namespace Skeletonization.DataLayer.Abstractions
 {
     public interface IVideoReader
     {

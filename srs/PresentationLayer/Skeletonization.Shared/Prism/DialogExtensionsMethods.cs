@@ -1,5 +1,5 @@
 ﻿using Prism.Services.Dialogs;
-using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.CrossLayer.Data;
 using System.Linq;
 using System.Threading.Tasks;
 

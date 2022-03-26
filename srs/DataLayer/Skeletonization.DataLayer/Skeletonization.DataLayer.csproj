@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DirectShowLib" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\CrossLayer\Skeletonization.CrossLayer\Skeletonization.CrossLayer.csproj" />
   </ItemGroup>
 

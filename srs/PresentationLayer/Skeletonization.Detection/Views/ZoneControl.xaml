@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Skeletonization.PresentationLayer.Detection.Views.ZoneControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Detection.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Data;assembly=Skeletonization.Shared"
+    xmlns:shC="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
+    xmlns:shEx="clr-namespace:Skeletonization.PresentationLayer.Shared.Extensions;assembly=Skeletonization.Shared"
+    d:DataContext="{d:DesignInstance Type=sh:Zone}"
+    d:DesignHeight="500.467"
+    d:DesignWidth="350"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="md:TextFieldAssist.HasClearButton" Value="True" />
+        </Style>
+        <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4,4,10,4" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
+            <Image
+                Height="140"
+                Source="{Binding FrameRoiBytes}"
+                Stretch="Uniform" />
+        </Border>
+        <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />
+        <TextBox md:HintAssist.Hint="Мин. кол-во людей" Text="{Binding MinCount}" />
+        <TextBox md:HintAssist.Hint="Задержка" Text="{Binding Delay}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Text="Прозрачность:" />
+            <Slider
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Maximum="1"
+                Minimum="0"
+                Value="{Binding Opacity}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Text="Цвет:" />
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                ItemsSource="{Binding Source={x:Static shEx:ColorExtensionsMethods.Colors}}"
+                SelectedValue="{Binding Color, Converter={shC:ColorConverter}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
+                            <Rectangle Height="25" Fill="{Binding}" />
+                        </Border>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+    </StackPanel>
+</UserControl>

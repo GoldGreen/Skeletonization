@@ -1,4 +1,4 @@
-﻿namespace Skeletonization.PresentationLayer.Shared.Data
+﻿namespace Skeletonization.CrossLayer.Data
 {
     public record VideoDeviceInfo(int Id, string Name);
 }

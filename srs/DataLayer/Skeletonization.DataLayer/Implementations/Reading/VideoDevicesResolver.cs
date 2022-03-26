@@ -1,11 +1,11 @@
 ﻿using DirectShowLib;
-using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
-using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.CrossLayer.Data;
+using Skeletonization.DataLayer.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
+namespace Skeletonization.DataLayer.Implementations.Reading
 {
     internal class VideoDevicesResolver : IVideoDevicesResolver
     {

@@ -2,12 +2,11 @@
 using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
-using Skeletonization.DataLayer.Reading.Abstractions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Skeletonization.DataLayer.Reading.Implementations.Reading
+namespace Skeletonization.DataLayer.Implementations.Reading
 {
     internal class VideoReader : IVideoReader
     {
