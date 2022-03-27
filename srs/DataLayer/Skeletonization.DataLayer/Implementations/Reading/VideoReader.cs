@@ -53,7 +53,7 @@ namespace Skeletonization.DataLayer.Implementations.Reading
                         break;
                     }
 
-                    await changingCallback(new FrameInfo(frame, frameNum++));
+                    await changingCallback?.Invoke(new FrameInfo(frame, frameNum++));
                 }
             });
             _videoCapture.Dispose();

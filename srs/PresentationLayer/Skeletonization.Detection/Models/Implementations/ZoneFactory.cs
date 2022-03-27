@@ -1,5 +1,8 @@
-﻿using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+﻿using Skeletonization.CrossLayer.Data;
+using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
+using System;
+using System.Linq;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 {
@@ -16,7 +19,14 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                 Opacity = 0.5,
                 MinCount = 0,
                 Delay = 0,
-                CheckInside = true
+                CheckInside = true,
+                BodyParts = typeof(BodyPart).GetEnumValues()
+                                            .Cast<BodyPart>()
+                                            .Select(x => new Selectable<BodyPart>(x)
+                                            {
+                                                IsSelected = true
+                                            })
+                                            .ToList()
             };
         }
     }

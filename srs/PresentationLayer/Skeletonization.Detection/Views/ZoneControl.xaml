@@ -24,55 +24,96 @@
             <Setter Property="Margin" Value="4,4,10,4" />
         </Style>
     </UserControl.Resources>
-    <StackPanel>
-        <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
-            <Image
-                Height="140"
-                Source="{Binding FrameRoiBytes}"
-                Stretch="Uniform" />
-        </Border>
-        <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />
-        <TextBox md:HintAssist.Hint="Мин. кол-во людей" Text="{Binding MinCount}" />
-        <TextBox md:HintAssist.Hint="Задержка" Text="{Binding Delay}" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                Text="Прозрачность:" />
-            <Slider
-                Grid.Row="0"
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                Maximum="1"
-                Minimum="0"
-                Value="{Binding Opacity}" />
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                Text="Цвет:" />
-            <ComboBox
-                Grid.Row="1"
-                Grid.Column="1"
-                ItemsSource="{Binding Source={x:Static shEx:ColorExtensionsMethods.Colors}}"
-                SelectedValue="{Binding Color, Converter={shC:ColorConverter}}">
-                <ComboBox.ItemTemplate>
+    <ScrollViewer>
+        <StackPanel>
+            <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
+                <Image
+                    Height="140"
+                    Source="{Binding FrameRoiBytes}"
+                    Stretch="Uniform" />
+            </Border>
+            <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />
+            <TextBox md:HintAssist.Hint="Мин. кол-во людей" Text="{Binding MinCount}" />
+            <TextBox md:HintAssist.Hint="Задержка" Text="{Binding Delay}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Обнаруживает внутри:" />
+                <ToggleButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding CheckInside}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Прозрачность:" />
+                <Slider
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="{Binding Opacity}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Цвет:" />
+                <ComboBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    ItemsSource="{Binding Source={x:Static shEx:ColorExtensionsMethods.Colors}}"
+                    SelectedValue="{Binding Color, Converter={shC:ColorConverter}}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
+                                <Rectangle Height="25" Fill="{Binding}" />
+                            </Border>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            <local:BodyPartGrouper BodyParts="{Binding BodyParts}" />
+            <ItemsControl ItemsSource="{Binding FailedCheckingElements}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
-                            <Rectangle Height="25" Fill="{Binding}" />
-                        </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Human.Name}" />
+                            <ItemsControl ItemsSource="{Binding DetectedBodyParts}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={shC:EnumDescriptionConverter}}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Grid>
-    </StackPanel>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

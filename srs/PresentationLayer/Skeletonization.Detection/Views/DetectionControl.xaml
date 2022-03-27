@@ -74,12 +74,14 @@
         <Border
             Grid.Row="1"
             Grid.Column="0"
+            Margin="10"
             BorderBrush="{StaticResource MaterialDesignBody}"
             BorderThickness="3" />
         <Image
             x:Name="image"
             Grid.Row="1"
             Grid.Column="0"
+            Margin="10"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Source="{Binding Model.FrameBytes}"
@@ -89,6 +91,7 @@
             Grid.Column="0"
             Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}"
             Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}"
+            Margin="10"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=image, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=image, Mode=OneWay}"
             Background="Transparent">
@@ -129,6 +132,7 @@
         <ContentControl
             Grid.Row="1"
             Grid.Column="1"
+            Margin="10"
             prism:RegionManager.RegionName="{x:Static local:Regions.Zones}" />
     </Grid>
 </UserControl>

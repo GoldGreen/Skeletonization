@@ -7,6 +7,6 @@ namespace Skeletonization.BusinessLayer.Abstractions
 {
     public interface IFinder
     {
-        Task<IReadOnlyList<Human>> Find(Mat input, Mat drawed = null);
+        Task<IReadOnlyList<Human>> Find(Mat input);
     }
 }

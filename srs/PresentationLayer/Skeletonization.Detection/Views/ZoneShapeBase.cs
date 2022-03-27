@@ -1,10 +1,11 @@
-﻿using System.Windows;
+﻿using Skeletonization.PresentationLayer.Shared.Views;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Skeletonization.PresentationLayer.Detection.Views
 {
-    public class ZoneShapeBase : Control
+    public class ZoneShapeBase : ControlBase
     {
         public Brush Fill
         {
@@ -21,20 +22,6 @@ namespace Skeletonization.PresentationLayer.Detection.Views
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ZoneShapeBase), new FrameworkPropertyMetadata(typeof(ZoneShapeBase)));
         }
 
-        public ZoneShapeBase()
-        {
-            Loaded += OnLoaded;
-            Unloaded += OnUnloaded;
-        }
-
-        protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-        }
-
-        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         protected Point ToParent(Point point)
         {

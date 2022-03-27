@@ -1,6 +1,8 @@
 ﻿using Emgu.CV;
 using Prism.Events;
+using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Skeletonization.PresentationLayer.Shared.Prism
@@ -17,6 +19,11 @@ namespace Skeletonization.PresentationLayer.Shared.Prism
 
     #region Frame
     public class FrameChanged : PubSubEvent<Mat>
+    { }
+    #endregion
+
+    #region Humans
+    public class HumansChanged : PubSubEvent<IEnumerable<Human>>
     { }
     #endregion
 }

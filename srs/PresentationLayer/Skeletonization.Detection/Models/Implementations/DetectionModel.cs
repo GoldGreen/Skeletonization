@@ -12,6 +12,7 @@ using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
     {
         public IVideoService VideoService { get; }
         public IFinder Finder { get; }
+        public IDrawer Drawer { get; }
         public IEventAggregator EventAggregator { get; set; }
 
         [Reactive] public int FrameNum { get; set; }
@@ -29,22 +31,36 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         [Reactive] public string VideoDescription { get; set; }
 
         [Reactive] public Mat Frame { get; set; }
+        [Reactive] public Mat DrawedFrame { get; set; }
         [Reactive] public byte[] FrameBytes { get; set; }
 
         [Reactive] public IEnumerable<Human> Humans { get; set; }
 
+        private VideoInfo _videoInfo;
+
         public DetectionModel(IVideoService videoService,
                               IFinder finder,
+                              IDrawer drawer,
                               IEventAggregator eventAggregator)
         {
             VideoService = videoService;
             Finder = finder;
+            Drawer = drawer;
             EventAggregator = eventAggregator;
+
+            this.WhenAnyValue(x => x.DrawedFrame)
+                .WhereNotNull()
+                .Subscribe(x => FrameBytes = x.ToBytes())
+                .Cashe();
 
             this.WhenAnyValue(x => x.Frame)
                 .WhereNotNull()
-                .Do(x => FrameBytes = x.ToBytes())
                 .Subscribe(EventAggregator.GetEvent<FrameChanged>().Publish)
+                .Cashe();
+
+            this.WhenAnyValue(x => x.Humans)
+                .WhereNotNull()
+                .Subscribe(EventAggregator.GetEvent<HumansChanged>().Publish)
                 .Cashe();
         }
 
@@ -65,19 +81,43 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             return Application.Current?.Dispatcher?.Invoke(async () =>
             {
                 var st = Stopwatch.StartNew();
+                //var humans = await Finder.Find(frame.Mat);
 
-                await Task.Delay(100);
                 Frame?.Dispose();
                 Frame = null;
-                Frame = frame.Mat;
+                DrawedFrame?.Dispose();
+                DrawedFrame = null;
 
+                Frame = frame.Mat;
+                var copy = frame.Mat.Clone();
+
+                //if (humans.Count > 0)
+                //{
+                //    Drawer.Draw(copy, humans);
+                //}
+                DrawedFrame = copy;
+
+                //Humans = humans.Select(x => x with
+                //{
+                //    Points = x.Points
+                //              .Select
+                //              (y => y with
+                //              {
+                //                  Point = new
+                //                  (
+                //                      y.Point.X / _videoInfo.Width,
+                //                      y.Point.Y / _videoInfo.Height
+                //                  )
+                //              }).ToList()
+                //});
                 FrameNum = frame.Num;
                 FrameHandlingTime = st.ElapsedMilliseconds;
             });
         }
 
-        public void HandleVideoInformation(VideoInfo size)
+        public void HandleVideoInformation(VideoInfo videoInfo)
         {
+            _videoInfo = videoInfo;
         }
     }
 }

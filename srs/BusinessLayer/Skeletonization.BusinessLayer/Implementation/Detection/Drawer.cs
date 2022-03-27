@@ -4,6 +4,7 @@ using Emgu.CV.Structure;
 using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 using Dr = System.Drawing;
 
@@ -11,8 +12,17 @@ namespace Skeletonization.BusinessLayer.Implementation.Detection
 {
     internal class Drawer : IDrawer
     {
-        public void Draw(Mat mat, Dr.Point[,] points)
+        public IHumanConverter HumanConverter { get; }
+
+        public Drawer(IHumanConverter humanConverter)
         {
+            HumanConverter = humanConverter;
+        }
+
+        public void Draw(Mat mat, IEnumerable<Human> humans)
+        {
+            var points = HumanConverter.Convert(humans);
+
             for (int i = 0; i < points.GetLength(0); i++)
             {
                 var personPoints = points.GetArray(i);

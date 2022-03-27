@@ -10,7 +10,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Detection
     {
         public Dr.Point[,] Prepare(Dr.Point[,] points)
         {
-            var result = new Dr.Point[points.GetLength(0), Enum.GetValues(typeof(BodyPart)).Length];
+            var result = new Dr.Point[points.GetLength(0), Enum.GetValues<BodyPart>().Length];
 
             for (int i = 0; i < result.GetLength(0); i++)
             {

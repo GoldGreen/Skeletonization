@@ -7,5 +7,6 @@ namespace Skeletonization.BusinessLayer.Abstractions
     public interface IHumanConverter
     {
         IEnumerable<Human> Convert(Dr.Point[,] points);
+        Dr.Point[,] Convert(IEnumerable<Human> humans);
     }
 }
