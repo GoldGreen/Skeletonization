@@ -1,12 +1,13 @@
 ﻿using Emgu.CV;
 using ReactiveUI;
 using Skeletonization.BusinessLayer.Abstractions;
+using System.Windows.Media;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Abstractions
 {
     public interface IDetectionModel : IReactiveObject, IVideoProcessingHandler
     {
-        byte[] FrameBytes { get; set; }
+        ImageSource FrameSource { get; set; }
         Mat Frame { get; set; }
         int FrameNum { get; set; }
         long FrameHandlingTime { get; set; }

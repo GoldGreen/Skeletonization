@@ -5,17 +5,17 @@ using ReactiveUI.Fody.Helpers;
 using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
-using Skeletonization.CrossLayer.Extensions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+using Skeletonization.PresentationLayer.Shared.Extensions;
 using Skeletonization.PresentationLayer.Shared.Prism;
 using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 {
@@ -32,7 +32,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
         [Reactive] public Mat Frame { get; set; }
         [Reactive] public Mat DrawedFrame { get; set; }
-        [Reactive] public byte[] FrameBytes { get; set; }
+        [Reactive] public ImageSource FrameSource { get; set; }
 
         [Reactive] public IEnumerable<Human> Humans { get; set; }
 
@@ -50,7 +50,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
             this.WhenAnyValue(x => x.DrawedFrame)
                 .WhereNotNull()
-                .Subscribe(x => FrameBytes = x.ToBytes())
+                .Subscribe(x => FrameSource = x.ToImageSource())
                 .Cashe();
 
             this.WhenAnyValue(x => x.Frame)

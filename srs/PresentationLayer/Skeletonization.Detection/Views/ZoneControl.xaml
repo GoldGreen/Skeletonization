@@ -29,7 +29,7 @@
             <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
                 <Image
                     Height="140"
-                    Source="{Binding FrameRoiBytes}"
+                    Source="{Binding FrameRoiSource}"
                     Stretch="Uniform" />
             </Border>
             <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />

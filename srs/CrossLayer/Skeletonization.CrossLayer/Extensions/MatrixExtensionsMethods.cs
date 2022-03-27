@@ -6,13 +6,6 @@ namespace Skeletonization.CrossLayer.Extensions
 {
     public static class MatrixExtensionsMethods
     {
-        public static byte[] ToBytes(this Mat mat)
-        {
-            using VectorOfByte output = new();
-            CvInvoke.Imencode(".png", mat, output);
-            return output.ToArray();
-        }
-
         public static T[] GetArray<T>(this T[,] matrix, int index)
         {
             var array = new T[matrix.GetLength(1)];

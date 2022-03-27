@@ -23,11 +23,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="3">
             <Menu Height="40">
                 <Menu.Resources>
                     <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
@@ -74,24 +75,24 @@
         <Border
             Grid.Row="1"
             Grid.Column="0"
-            Margin="10"
             BorderBrush="{StaticResource MaterialDesignBody}"
-            BorderThickness="3" />
-        <Image
-            x:Name="image"
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Source="{Binding Model.FrameBytes}"
-            Stretch="Uniform" />
+            BorderThickness="3">
+            <Image
+                x:Name="image"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Source="{Binding Model.FrameSource}"
+                Stretch="Uniform" />
+        </Border>
         <Canvas
             Grid.Row="1"
             Grid.Column="0"
             Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}"
             Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}"
-            Margin="10"
+            Margin="{Binding Margin, ElementName=image, Mode=OneWay}"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=image, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=image, Mode=OneWay}"
             Background="Transparent">
@@ -134,5 +135,9 @@
             Grid.Column="1"
             Margin="10"
             prism:RegionManager.RegionName="{x:Static local:Regions.Zones}" />
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="10" />
     </Grid>
 </UserControl>

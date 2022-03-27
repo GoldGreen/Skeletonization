@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emgu.CV.Bitmap" Version="4.4.0.4099" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.5" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
@@ -16,6 +17,7 @@
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
     <PackageReference Include="ReactiveUI.Fody" Version="16.4.15" />
     <PackageReference Include="ReactiveUI.WPF" Version="16.4.15" />
+    <PackageReference Include="Stira.ImageLibrary.Wpf" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>

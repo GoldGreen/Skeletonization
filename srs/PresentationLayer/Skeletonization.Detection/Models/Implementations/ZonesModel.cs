@@ -3,9 +3,9 @@ using Prism.Events;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.CrossLayer.Data;
-using Skeletonization.CrossLayer.Extensions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.PresentationLayer.Shared.Extensions;
 using Skeletonization.PresentationLayer.Shared.Prism;
 using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
@@ -13,7 +13,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -66,6 +65,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             EventAggregator.GetEvent<HumansChanged>()
                            .ToObservable()
                            .WhereNotNull()
+                           .Do(x => _humansCashe = x)
                            .Subscribe(x => Humans = x)
                            .Cashe();
         }
@@ -84,7 +84,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                                   .Subscribe(frame =>
                                   {
                                       Mat roi = new(frame, CreateRect(zone, frame.Width, frame.Height));
-                                      zone.FrameRoiBytes = roi.ToBytes();
+                                      zone.FrameRoiSource = roi.ToImageSource();
                                   });
 
             var zoneParametersChanged = zone.WhenAnyValue(x => x.Name, x => x.MinCount, x => x.Delay, x => x.CheckInside)

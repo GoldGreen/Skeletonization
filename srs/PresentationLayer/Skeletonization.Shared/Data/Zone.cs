@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Windows.Media;
 
 namespace Skeletonization.PresentationLayer.Shared.Data
 {
@@ -25,7 +26,7 @@ namespace Skeletonization.PresentationLayer.Shared.Data
         [Reactive] public IEnumerable<Selectable<BodyPart>> BodyParts { get; set; }
         [Reactive] public bool CheckInside { get; set; }
 
-        [Reactive] public byte[] FrameRoiBytes { get; set; }
+        [Reactive] public ImageSource FrameRoiSource { get; set; }
 
         [Reactive] public string Name { get; set; }
         [Reactive] public string Color { get; set; }

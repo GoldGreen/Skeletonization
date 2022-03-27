@@ -31,7 +31,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Detection
         public Dr.Point[,] Convert(IEnumerable<Human> humans)
         {
             var humansList = humans.ToList();
-            var points = new Dr.Point[humansList.Count, 18];
+            var points = new Dr.Point[humansList.Count, Enum.GetValues<BodyPart>().Length];
 
             for (int i = 0; i < points.GetLength(0); i++)
             {
