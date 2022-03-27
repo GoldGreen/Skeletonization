@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Skeletonization.Constructor\Skeletonization.Constructor.csproj" />
     <ProjectReference Include="..\Skeletonization.Detection\Skeletonization.Detection.csproj" />
     <ProjectReference Include="..\Skeletonization.Humans\Skeletonization.Humans.csproj" />
     <ProjectReference Include="..\Skeletonization.Settings\Skeletonization.Settings.csproj" />

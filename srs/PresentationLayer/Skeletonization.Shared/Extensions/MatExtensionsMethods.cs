@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -14,7 +15,7 @@ namespace Skeletonization.PresentationLayer.Shared.Extensions
             using var source = image.ToBitmap();
             var ptr = source.GetHbitmap();
 
-            var bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+            var bs = Imaging.CreateBitmapSourceFromHBitmap(
                 ptr,
                 IntPtr.Zero,
                 Int32Rect.Empty,

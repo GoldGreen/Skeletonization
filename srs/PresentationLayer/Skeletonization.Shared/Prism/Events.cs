@@ -26,5 +26,10 @@ namespace Skeletonization.PresentationLayer.Shared.Prism
     public class HumansChanged : PubSubEvent<IEnumerable<Human>>
     { }
     #endregion
+   
+    #region Notification
+    public class NotificationSended : PubSubEvent<string> 
+    { }
+    #endregion
 }
 

@@ -35,47 +35,27 @@
             <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />
             <TextBox md:HintAssist.Hint="Мин. кол-во людей" Text="{Binding MinCount}" />
             <TextBox md:HintAssist.Hint="Задержка" Text="{Binding Delay}" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Обнаруживает внутри:" />
+            <WrapPanel>
+                <TextBlock VerticalAlignment="Center" Text="Обнаруживает внутри:" />
                 <ToggleButton
-                    Grid.Row="0"
-                    Grid.Column="1"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     IsChecked="{Binding CheckInside}" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Прозрачность:" />
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock VerticalAlignment="Center" Text="Прозрачность:" />
                 <Slider
-                    Grid.Row="1"
-                    Grid.Column="1"
+                    Width="150"
                     VerticalAlignment="Center"
                     Maximum="1"
                     Minimum="0"
+                    TickFrequency="0.1"
                     Value="{Binding Opacity}" />
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Text="Цвет:" />
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock VerticalAlignment="Center" Text="Цвет:" />
                 <ComboBox
-                    Grid.Row="2"
-                    Grid.Column="1"
+                    Width="150"
                     ItemsSource="{Binding Source={x:Static shEx:ColorExtensionsMethods.Colors}}"
                     SelectedValue="{Binding Color, Converter={shC:ColorConverter}}">
                     <ComboBox.ItemTemplate>
@@ -86,7 +66,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </Grid>
+            </WrapPanel>
             <local:BodyPartGrouper BodyParts="{Binding BodyParts}" />
             <ItemsControl ItemsSource="{Binding FailedCheckingElements}">
                 <ItemsControl.ItemsPanel>

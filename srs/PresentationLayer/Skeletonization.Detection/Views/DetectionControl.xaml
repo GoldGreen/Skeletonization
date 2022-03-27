@@ -39,14 +39,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Kind="VideoPlus" />
-                            <TextBlock Text="Выбрать видеопоток" />
+                            <TextBlock Text="Открыть видеопоток" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem Command="{Binding StartVideoFromFileCommand}">
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Kind="File" />
-                                <TextBlock Text="Файл" />
+                                <TextBlock Text="Из файла" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -54,7 +54,7 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Kind="Camera" />
-                                <TextBlock Text="Камера" />
+                                <TextBlock Text="С камеры" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>

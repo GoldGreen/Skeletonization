@@ -29,7 +29,7 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
             (
                 () => Model.Zones.Remove(Model.SelectedZone),
                 Model.WhenAnyValue(x => x.SelectedZone)
-                     .Select(x => x is not null && Model.Zones.Contains(x))
+                     .Select(x => x is not null)
             );
         }
     }

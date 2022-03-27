@@ -7,20 +7,20 @@ using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
 using Skeletonization.PresentationLayer.Shared.Prism;
 using Skeletonization.PresentationLayer.Shared.Reactive;
+using Skeletonization.PresentationLayer.Shared.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Skeletonization.PresentationLayer.Detection.ViewModels
 {
-    internal class DetectionViewModel : ReactiveObject
+    internal class DetectionViewModel : ZonesConsumerViewModel
     {
         public IDetectionModel Model { get; }
-        public IEventAggregator EventAggregator { get; }
         public IDialogService DialogService { get; }
-        public ObservableCollection<Zone> Zones { get; } = new();
         [Reactive] public Zone SelectedZone { get; set; }
 
         public ICommand StartVideoFromFileCommand { get; }
@@ -29,23 +29,10 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
         public DetectionViewModel(IDetectionModel model,
                                   IEventAggregator eventAggregator,
                                   IDialogService dialogService)
+            : base(eventAggregator)
         {
             Model = model;
-            EventAggregator = eventAggregator;
             DialogService = dialogService;
-
-            var zoneChanged = EventAggregator.GetEvent<ZonesChanged>()
-                                             .ToObservable();
-
-            zoneChanged.Where(x => x.action == NotifyCollectionChangedAction.Add)
-                       .Select(x => x.zone)
-                       .Subscribe(Zones.Add)
-                       .Cashe();
-
-            zoneChanged.Where(x => x.action == NotifyCollectionChangedAction.Remove)
-                       .Select(x => x.zone)
-                       .Subscribe(x => Zones.Remove(x))
-                       .Cashe();
 
             this.WhenAnyValue(x => x.SelectedZone)
                 .WhereNotNull()

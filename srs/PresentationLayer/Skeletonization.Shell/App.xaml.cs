@@ -1,8 +1,8 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Unity;
 using Skeletonization.BusinessLayer;
-using Skeletonization.Constructor;
 using Skeletonization.DataLayer;
 using Skeletonization.Humans;
 using Skeletonization.PresentationLayer.Detection;
@@ -21,6 +21,8 @@ namespace Skeletonization.PresentationLayer.Shell
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            ViewModelLocationProvider.Register<ShellWindow, ShellViewModel>();
+
             containerRegistry.AddBusinesLayer(); 
             containerRegistry.AddDataLayer();
         }
@@ -30,7 +32,6 @@ namespace Skeletonization.PresentationLayer.Shell
             moduleCatalog.AddModule<DetectionModule>();
             moduleCatalog.AddModule<ZonesModule>();
             moduleCatalog.AddModule<HumansModule>();
-            moduleCatalog.AddModule<ConstructorModule>();
             moduleCatalog.AddModule<SettingsModule>();
             base.ConfigureModuleCatalog(moduleCatalog);
         }
