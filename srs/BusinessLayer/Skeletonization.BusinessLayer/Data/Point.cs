@@ -1,4 +1,4 @@
-﻿namespace Skeletonization.CrossLayer.Data
+﻿namespace Skeletonization.BusinessLayer.Data
 {
     public record Point(double X, double Y)
     {

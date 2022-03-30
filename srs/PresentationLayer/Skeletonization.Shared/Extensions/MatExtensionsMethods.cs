@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using Skeletonization.CrossLayer.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-using D = Skeletonization.CrossLayer.Data;
+using D = Skeletonization.BusinessLayer.Data;
 
 namespace Skeletonization.PresentationLayer.Shared.Extensions
 {

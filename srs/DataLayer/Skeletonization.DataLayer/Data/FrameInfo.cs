@@ -1,6 +1,6 @@
 ﻿using Emgu.CV;
 
-namespace Skeletonization.CrossfulLayer.Data
+namespace Skeletonization.DataLayer.Data
 {
     public record FrameInfo(Mat Mat, int Num);
 }

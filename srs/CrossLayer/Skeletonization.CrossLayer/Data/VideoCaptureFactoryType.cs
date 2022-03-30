@@ -1,6 +1,6 @@
 ﻿namespace Skeletonization.CrossLayer.Data
 {
-    public enum VideoCaptureFabricType
+    public enum VideoCaptureFactoryType
     {
         File,
         Camera

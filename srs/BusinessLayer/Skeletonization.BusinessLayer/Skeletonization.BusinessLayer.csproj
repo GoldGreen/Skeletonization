@@ -8,8 +8,4 @@
     <ProjectReference Include="..\..\DataLayer\Skeletonization.DataLayer\Skeletonization.DataLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementation\Reporting\" />
-  </ItemGroup>
-
 </Project>

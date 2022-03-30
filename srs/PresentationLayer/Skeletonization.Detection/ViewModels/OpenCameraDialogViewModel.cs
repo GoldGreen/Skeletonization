@@ -2,8 +2,8 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.BusinessLayer.Abstractions;
-using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
+using Skeletonization.DataLayer.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

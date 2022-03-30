@@ -1,4 +1,4 @@
-﻿using Skeletonization.CrossLayer.Data;
+﻿using Skeletonization.BusinessLayer.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

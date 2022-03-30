@@ -4,10 +4,10 @@ using Skeletonization.CrossfulLayer.Abstractions;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Exceptions;
 using Skeletonization.DataLayer.Abstractions;
-using Skeletonization.DataLayer.Implementations.Reading;
+using Skeletonization.DataLayer.Data;
 using System.Collections.Generic;
 
-namespace Skeletonization.BusinessLayer.Implementation.Reading
+namespace Skeletonization.BusinessLayer.Implementation.Services
 {
     internal class VideoService : IVideoService
     {
@@ -26,16 +26,16 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
             return VideoReader.Paused;
         }
 
-        private void Start(VideoCaptureFabricType fabricType, object arg, IVideoProcessingHandler handler)
+        private void Start(VideoCaptureFactoryType fabricType, object arg, IVideoProcessingHandler handler)
         {
             IFactory<VideoCapture> fabric = fabricType switch
             {
-                VideoCaptureFabricType.File => arg switch
+                VideoCaptureFactoryType.File => arg switch
                 {
                     string filename => new VideoCaptureFileFactory(filename),
                     _ => throw new VideoCaptureFabricException(fabricType, arg, typeof(string))
                 },
-                VideoCaptureFabricType.Camera => arg switch
+                VideoCaptureFactoryType.Camera => arg switch
                 {
                     int cameraId => new VideoCaptureCameraFactory(cameraId),
                     _ => throw new VideoCaptureFabricException(fabricType, arg, typeof(int))
@@ -48,12 +48,12 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
 
         public void StartFile(string filePath, IVideoProcessingHandler handler)
         {
-            Start(VideoCaptureFabricType.File, filePath, handler);
+            Start(VideoCaptureFactoryType.File, filePath, handler);
         }
 
         public void StartCamera(int cameraId, IVideoProcessingHandler handler)
         {
-            Start(VideoCaptureFabricType.Camera, cameraId, handler);
+            Start(VideoCaptureFactoryType.Camera, cameraId, handler);
         }
 
         public IEnumerable<VideoDeviceInfo> GetVideoDevices()

@@ -3,7 +3,7 @@ using Prism.Ioc;
 using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.BusinessLayer.Configuration;
 using Skeletonization.BusinessLayer.Implementation.Detection;
-using Skeletonization.BusinessLayer.Implementation.Reading;
+using Skeletonization.BusinessLayer.Implementation.Services;
 using Skeletonization.CrossLayer.Extensions;
 
 namespace Skeletonization.BusinessLayer

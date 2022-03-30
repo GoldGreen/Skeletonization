@@ -1,5 +1,4 @@
-﻿using Skeletonization.CrossfulLayer.Data;
-using Skeletonization.CrossLayer.Data;
+﻿using Skeletonization.DataLayer.Data;
 using System.Threading.Tasks;
 
 namespace Skeletonization.BusinessLayer.Abstractions

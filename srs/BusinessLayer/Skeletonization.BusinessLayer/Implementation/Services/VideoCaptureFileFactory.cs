@@ -1,7 +1,7 @@
 ﻿using Emgu.CV;
 using Skeletonization.CrossfulLayer.Abstractions;
 
-namespace Skeletonization.DataLayer.Implementations.Reading
+namespace Skeletonization.BusinessLayer.Implementation.Services
 {
     public class VideoCaptureFileFactory : IFactory<VideoCapture>
     {

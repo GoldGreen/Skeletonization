@@ -1,8 +1,7 @@
 ﻿using Emgu.CV;
 using Skeletonization.CrossfulLayer.Abstractions;
-using Skeletonization.CrossfulLayer.Data;
-using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
+using Skeletonization.DataLayer.Data;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

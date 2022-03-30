@@ -2,6 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Skeletonization.BusinessLayer.Abstractions;
+using Skeletonization.BusinessLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Extensions;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Skeletonization.CrossLayer.Data;
+﻿using Skeletonization.BusinessLayer.Data;
 using System.Windows;
 using System.Windows.Controls;
 

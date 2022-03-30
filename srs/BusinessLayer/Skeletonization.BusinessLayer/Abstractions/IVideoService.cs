@@ -1,4 +1,4 @@
-﻿using Skeletonization.CrossLayer.Data;
+﻿using Skeletonization.DataLayer.Data;
 using System.Collections.Generic;
 
 namespace Skeletonization.BusinessLayer.Abstractions

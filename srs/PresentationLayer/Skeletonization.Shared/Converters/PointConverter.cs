@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using D = Skeletonization.CrossLayer.Data;
+using D = Skeletonization.BusinessLayer.Data;
 
 namespace Skeletonization.PresentationLayer.Shared.Converters
 {

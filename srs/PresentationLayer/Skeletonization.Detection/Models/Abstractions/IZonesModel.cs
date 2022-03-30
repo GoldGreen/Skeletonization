@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-using Skeletonization.CrossLayer.Data;
+using Skeletonization.BusinessLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

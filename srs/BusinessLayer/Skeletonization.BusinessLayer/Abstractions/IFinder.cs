@@ -1,5 +1,5 @@
 ﻿using Emgu.CV;
-using Skeletonization.CrossLayer.Data;
+using Skeletonization.BusinessLayer.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

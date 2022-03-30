@@ -2,7 +2,7 @@
 using Prism.Events;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Skeletonization.CrossLayer.Data;
+using Skeletonization.BusinessLayer.Data;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
 using Skeletonization.PresentationLayer.Shared.Extensions;
