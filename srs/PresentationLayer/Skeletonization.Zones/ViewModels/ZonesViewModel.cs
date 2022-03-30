@@ -1,15 +1,14 @@
-﻿using ReactiveUI;
-using Skeletonization.Zones.Models.Abstractions;
+﻿using Prism.Events;
+using ReactiveUI;
+using Skeletonization.PresentationLayer.Shared.Extensions;
 
 namespace Skeletonization.Zones.ViewModels
 {
-    internal class ZonesViewModel : ReactiveObject
+    internal class ZonesViewModel : ZonesConsumer, IReactiveObject
     {
-        public IZonesModel Model { get; }
-
-        public ZonesViewModel(IZonesModel model)
+        public ZonesViewModel(IEventAggregator eventAggregator) 
+            : base(eventAggregator)
         {
-            Model = model;
         }
     }
 }

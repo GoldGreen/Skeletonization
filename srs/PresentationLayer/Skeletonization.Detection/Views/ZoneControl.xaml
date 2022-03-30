@@ -9,6 +9,7 @@
     xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Data;assembly=Skeletonization.Shared"
     xmlns:shC="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
     xmlns:shEx="clr-namespace:Skeletonization.PresentationLayer.Shared.Extensions;assembly=Skeletonization.Shared"
+    xmlns:shV="clr-namespace:Skeletonization.PresentationLayer.Shared.Views;assembly=Skeletonization.Shared"
     d:DataContext="{d:DesignInstance Type=sh:Zone}"
     d:DesignHeight="500.467"
     d:DesignWidth="350"
@@ -29,10 +30,10 @@
             <Border BorderBrush="{StaticResource MaterialDesignBody}" BorderThickness="2">
                 <Image
                     Height="140"
-                    Source="{Binding FrameRoiSource}"
+                    Source="{Binding ZoneRoiSource}"
                     Stretch="Uniform" />
             </Border>
-            <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name}" />
+            <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox md:HintAssist.Hint="Мин. кол-во людей" Text="{Binding MinCount}" />
             <TextBox md:HintAssist.Hint="Задержка" Text="{Binding Delay}" />
             <WrapPanel>
@@ -67,7 +68,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </WrapPanel>
-            <local:BodyPartGrouper BodyParts="{Binding BodyParts}" />
+            <shV:BodyPartGrouper BodyParts="{Binding BodyParts}" />
             <ItemsControl ItemsSource="{Binding FailedCheckingElements}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -76,21 +77,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Human.Name}" />
-                            <ItemsControl ItemsSource="{Binding DetectedBodyParts}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Converter={shC:EnumDescriptionConverter}}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                        <shV:HumanResultControl BodyParts="{Binding DetectedBodyParts}" Human="{Binding Human}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

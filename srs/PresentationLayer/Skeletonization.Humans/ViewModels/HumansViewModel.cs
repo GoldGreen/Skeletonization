@@ -1,15 +1,23 @@
-﻿using ReactiveUI;
-using Skeletonization.Humans.Models.Abstractions;
+﻿using Prism.Events;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.PresentationLayer.Shared.Prism;
+using System.Collections.Generic;
 
 namespace Skeletonization.Humans.ViewModels
 {
     internal class HumansViewModel : ReactiveObject
     {
-        public IHumansModel Model { get; }
+        public IEventAggregator EventAggregator { get; }
+        [Reactive] public IEnumerable<HumanWithRoi> Humans { get; set; }
 
-        public HumansViewModel(IHumansModel model)
+        public HumansViewModel(IEventAggregator eventAggregator)
         {
-            Model = model;
+            EventAggregator = eventAggregator;
+
+            EventAggregator.GetEvent<HumansChanged>()
+                           .Subscribe(x => Humans = x);
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using ReactiveUI;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
-using Skeletonization.PresentationLayer.Shared.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Windows;
 
-namespace Skeletonization.PresentationLayer.Detection.Views
+namespace Skeletonization.PresentationLayer.Shared.Views
 {
     public class BodyPartGrouper : ControlBase
     {

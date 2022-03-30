@@ -5,19 +5,16 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
+using Skeletonization.PresentationLayer.Shared.Extensions;
 using Skeletonization.PresentationLayer.Shared.Prism;
 using Skeletonization.PresentationLayer.Shared.Reactive;
-using Skeletonization.PresentationLayer.Shared.ViewModels;
 using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Skeletonization.PresentationLayer.Detection.ViewModels
 {
-    internal class DetectionViewModel : ZonesConsumerViewModel
+    internal class DetectionViewModel : ZonesConsumer, IReactiveObject
     {
         public IDetectionModel Model { get; }
         public IDialogService DialogService { get; }
@@ -60,10 +57,10 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
 
             StartVideoFromCameraCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var res = await DialogService.OpenCameraChooseDialog();
-                if (res.ok)
+                var (ok, device) = await DialogService.OpenCameraChooseDialog();
+                if (ok)
                 {
-                    Model.StartVideoFromCamera(res.device.Id);
+                    Model.StartVideoFromCamera(device.Id);
                 }
             });
         }

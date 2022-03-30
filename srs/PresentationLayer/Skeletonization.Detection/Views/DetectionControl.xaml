@@ -21,9 +21,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition MinWidth="100" />
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition Width="360" />
         </Grid.ColumnDefinitions>
         <StackPanel
             Grid.Row="0"

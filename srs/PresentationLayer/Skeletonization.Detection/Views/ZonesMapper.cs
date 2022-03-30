@@ -49,8 +49,8 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                       typeof(ZonesMapper),
                                       new PropertyMetadata(new DataTemplatesCollection()));
 
-        private IDisposable _zonesChangeSub;
-        private readonly Dictionary<Zone, (IEnumerable<FrameworkElement> elements, IDisposable selectedSub)> _zonesData = new();
+        private IDisposable _sub;
+        private readonly Dictionary<Zone, (IEnumerable<FrameworkElement> elements, IDisposable sub)> _zonesData = new();
 
         static ZonesMapper()
         {
@@ -59,20 +59,20 @@ namespace Skeletonization.PresentationLayer.Detection.Views
 
         private static void ZonesChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not ZonesMapper z)
-            {
-                return;
-            }
+            (d as ZonesMapper).ZonesChanged();
+        }
 
-            z._zonesChangeSub?.Dispose();
+        private void ZonesChanged()
+        {
+            _sub?.Dispose();
 
-            var add = z.Zones.ToObservable(NotifyCollectionChangedAction.Add)
-                             .Do(z.AddZone);
+            var add = Zones.ToObservable(NotifyCollectionChangedAction.Add)
+                             .Do(AddZone);
 
-            var remove = z.Zones.ToObservable(NotifyCollectionChangedAction.Remove)
-                                .Do(z.RemoveZone);
+            var remove = Zones.ToObservable(NotifyCollectionChangedAction.Remove)
+                                .Do(RemoveZone);
 
-            z._zonesChangeSub = add.Merge(remove)
+            _sub = add.Merge(remove)
                                    .Subscribe();
         }
 
@@ -100,15 +100,15 @@ namespace Skeletonization.PresentationLayer.Detection.Views
 
         private void RemoveZone(Zone zone)
         {
-            var data = _zonesData[zone];
+            var (elements, sub) = _zonesData[zone];
 
             var parent = Parent as Panel;
-            foreach (var visualEl in data.elements)
+            foreach (var visualEl in elements)
             {
                 parent.Children.Remove(visualEl);
             }
 
-            data.selectedSub.Dispose();
+            sub.Dispose();
 
             _zonesData.Remove(zone);
 

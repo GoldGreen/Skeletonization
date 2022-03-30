@@ -5,12 +5,70 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.Zones.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:shV="clr-namespace:Skeletonization.PresentationLayer.Shared.Views;assembly=Skeletonization.Shared"
     xmlns:vm="clr-namespace:Skeletonization.Zones.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:ZonesViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
-        <TextBlock Text="Зоны" />
-    </Grid>
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4" />
+        </Style>
+        <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4,4,10,4" />
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Zones}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        MinWidth="400"
+                        Margin="10"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{StaticResource MaterialDesignBody}"
+                        BorderThickness="2">
+                        <WrapPanel>
+                            <Border
+                                Padding="5"
+                                BorderBrush="{StaticResource MaterialDesignBody}"
+                                BorderThickness="2">
+                                <Image
+                                    Height="140"
+                                    MinWidth="50"
+                                    MaxWidth="370"
+                                    Source="{Binding ZoneRoiSource}"
+                                    Stretch="Uniform" />
+                            </Border>
+                            <StackPanel>
+                                <TextBox md:HintAssist.Hint="Имя" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <ItemsControl ItemsSource="{Binding FailedCheckingElements}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <shV:HumanResultControl BodyParts="{Binding DetectedBodyParts}" Human="{Binding Human}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

@@ -81,11 +81,9 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
             var sub = frameChanged.Merge(zonePointsFrameChanged)
                                   .WhereNotNull()
-                                  .Subscribe(frame =>
-                                  {
-                                      Mat roi = new(frame, CreateRect(zone, frame.Width, frame.Height));
-                                      zone.FrameRoiSource = roi.ToImageSource();
-                                  });
+                                  .Select(frame => frame.GetRoi(zone.GetPoints()))
+                                  .Select(x => x?.ToImageSource())
+                                  .Subscribe(image => zone.ZoneRoiSource = image);
 
             var zoneParametersChanged = zone.WhenAnyValue(x => x.Name, x => x.MinCount, x => x.Delay, x => x.CheckInside)
                                             .Select(_ => _humansCashe);
@@ -120,20 +118,6 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             {
                 sub.Dispose();
             }
-        }
-
-        private static Rectangle CreateRect(Zone zone, int frameWidth, int frameHeight)
-        {
-            var points = zone.GetPoints();
-
-            var (startX, startY, endX, endY) = (points.Min(p => p.X), points.Min(p => p.Y), points.Max(p => p.X), points.Max(p => p.Y));
-            int x = (int)(frameWidth * startX);
-            int y = (int)(frameHeight * startY);
-
-            int width = (int)(frameWidth * endX) - x;
-            int height = (int)(frameHeight * endY) - y;
-
-            return new Rectangle(x, y, width, height);
         }
     }
 }

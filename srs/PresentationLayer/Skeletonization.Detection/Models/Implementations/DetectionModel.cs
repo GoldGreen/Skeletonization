@@ -6,12 +6,14 @@ using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.CrossfulLayer.Data;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+using Skeletonization.PresentationLayer.Shared.Data;
 using Skeletonization.PresentationLayer.Shared.Extensions;
 using Skeletonization.PresentationLayer.Shared.Prism;
 using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,9 +36,8 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         [Reactive] public Mat DrawedFrame { get; set; }
         [Reactive] public ImageSource FrameSource { get; set; }
 
-        [Reactive] public IEnumerable<Human> Humans { get; set; }
+        [Reactive] public IEnumerable<HumanWithRoi> Humans { get; set; }
 
-        private VideoInfo _videoInfo;
 
         public DetectionModel(IVideoService videoService,
                               IFinder finder,
@@ -81,7 +82,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             return Application.Current?.Dispatcher?.Invoke(async () =>
             {
                 var st = Stopwatch.StartNew();
-                //var humans = await Finder.Find(frame.Mat);
+                var humans = await Finder.Find(frame.Mat);
 
                 Frame?.Dispose();
                 Frame = null;
@@ -91,33 +92,39 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                 Frame = frame.Mat;
                 var copy = frame.Mat.Clone();
 
-                //if (humans.Count > 0)
-                //{
-                //    Drawer.Draw(copy, humans);
-                //}
+                if (humans.Count > 0)
+                {
+                    Drawer.Draw(copy, humans);
+                }
                 DrawedFrame = copy;
 
-                //Humans = humans.Select(x => x with
-                //{
-                //    Points = x.Points
-                //              .Select
-                //              (y => y with
-                //              {
-                //                  Point = new
-                //                  (
-                //                      y.Point.X / _videoInfo.Width,
-                //                      y.Point.Y / _videoInfo.Height
-                //                  )
-                //              }).ToList()
-                //});
+                Humans = humans.Select(x => Convert(x, Frame))
+                               .ToList();
+
                 FrameNum = frame.Num;
                 FrameHandlingTime = st.ElapsedMilliseconds;
             });
         }
 
+        private static HumanWithRoi Convert(Human human, Mat mat)
+        {
+            var points = human.Points.Select
+                               (bp => bp with
+                               {
+                                   Point = new
+                                   (
+                                       bp.Point.X / mat.Width,
+                                       bp.Point.Y / mat.Height
+                                   )
+                               }).ToList();
+
+            return new HumanWithRoi(mat.GetRoi(points.Select(x => x.Point))?.ToImageSource(),
+                                    human.Name,
+                                    points);
+        }
+
         public void HandleVideoInformation(VideoInfo videoInfo)
         {
-            _videoInfo = videoInfo;
         }
     }
 }

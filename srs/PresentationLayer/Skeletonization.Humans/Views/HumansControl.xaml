@@ -5,12 +5,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Skeletonization.Humans.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sh="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
+    xmlns:shV="clr-namespace:Skeletonization.PresentationLayer.Shared.Views;assembly=Skeletonization.Shared"
     xmlns:vm="clr-namespace:Skeletonization.Humans.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:HumansViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
-        <TextBlock Text="Люди" />
-    </Grid>
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="4,4,10,4" />
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Humans}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        MinWidth="400"
+                        Margin="10"
+                        Padding="5"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{StaticResource MaterialDesignBody}"
+                        BorderThickness="2">
+                        <WrapPanel>
+                            <Border
+                                Padding="5"
+                                BorderBrush="{StaticResource MaterialDesignBody}"
+                                BorderThickness="2">
+                                <Image
+                                    Width="140"
+                                    MinHeight="50"
+                                    MaxHeight="370"
+                                    Source="{Binding HumanRoi}"
+                                    Stretch="Uniform" />
+                            </Border>
+                            <shV:HumanResultControl
+                                Margin="5"
+                                Padding="5"
+                                BodyParts="{Binding Points, Converter={sh:BodyPartsSelectorConverter}}"
+                                Human="{Binding}" />
+                        </WrapPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

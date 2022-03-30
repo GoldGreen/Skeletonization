@@ -8,14 +8,14 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reactive.Linq;
 
-namespace Skeletonization.PresentationLayer.Shared.ViewModels
+namespace Skeletonization.PresentationLayer.Shared.Extensions
 {
-    public class ZonesConsumerViewModel : ReactiveObject
+    public class ZonesConsumer : ReactiveObject
     {
         public IEventAggregator EventAggregator { get; }
         public ObservableCollection<Zone> Zones { get; } = new();
 
-        public ZonesConsumerViewModel(IEventAggregator eventAggregator)
+        public ZonesConsumer(IEventAggregator eventAggregator)
         {
             EventAggregator = eventAggregator;
 

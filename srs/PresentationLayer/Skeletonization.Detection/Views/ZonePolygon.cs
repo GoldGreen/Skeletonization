@@ -1,9 +1,9 @@
 ﻿using ReactiveUI;
-using Skeletonization.PresentationLayer.Shared.Converters;
 using Skeletonization.PresentationLayer.Shared.Data;
 using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,9 +36,7 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                       typeof(PointCollection),
                                       typeof(ZonePolygon));
 
-        private IDisposable _movingSub;
-        private IDisposable _draggingSub;
-        private IDisposable _pointsSub;
+        private IDisposable _sub;
 
         private bool _isDragging;
         private Point _lastPosition;
@@ -53,8 +51,9 @@ namespace Skeletonization.PresentationLayer.Detection.Views
         {
             var resizing = (Parent as Panel).SizeChangedObservable()
                                               .Select(_ => Zone.Points);
+            _sub?.Dispose();
 
-            _pointsSub = Zone.WhenAnyValue(x => x.Points)
+            var pointsSub = Zone.WhenAnyValue(x => x.Points)
                                  .Merge(resizing)
                                  .Select(x => x.Select(x => new Point(x.X, x.Y)))
                                  .Select(x => x.Select(ToParent))
@@ -62,7 +61,7 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                  .Subscribe(x => Points = x);
 
             var parent = Parent as Panel;
-            _movingSub = parent.MouseMoveObservable()
+            var movingSub = parent.MouseMoveObservable()
                                .Where(_ => _isDragging)
                                .Select(x =>
                                {
@@ -89,15 +88,15 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                 .Do(x => _lastPosition = x)
                                 .Select(_ => true);
 
-            _draggingSub = parentMouseUp.Merge(mouseDown)
+            var draggingSub = parentMouseUp.Merge(mouseDown)
                                         .Subscribe(x => _isDragging = x);
+
+            _sub = new CompositeDisposable(pointsSub, movingSub, draggingSub);
         }
 
         protected override void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            _movingSub?.Dispose();
-            _draggingSub?.Dispose();
-            _pointsSub?.Dispose();
+            _sub?.Dispose();
         }
     }
 }

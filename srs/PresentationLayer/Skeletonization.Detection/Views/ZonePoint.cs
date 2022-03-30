@@ -1,5 +1,6 @@
 ﻿using Skeletonization.PresentationLayer.Shared.Reactive;
 using System;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,7 @@ namespace Skeletonization.PresentationLayer.Detection.Views
                                                typeof(ZonePoint),
                                                new(PointChangedCallback));
 
-        private IDisposable _parentSizeChanged;
-        private IDisposable _movingSub;
-        private IDisposable _draggingSub;
+        private IDisposable _sub;
         private bool _isDragging;
 
         static ZonePoint()
@@ -34,14 +33,14 @@ namespace Skeletonization.PresentationLayer.Detection.Views
         {
             var parent = Parent as Panel;
 
-            _parentSizeChanged = parent.SizeChangedObservable()
-                                       .Subscribe(_ => DrawPoint());
+            var parentSizeChanged = parent.SizeChangedObservable()
+                                          .Subscribe(_ => DrawPoint());
 
-            _movingSub = parent.MouseMoveObservable()
-                               .Where(_ => _isDragging)
-                               .Select(x => x.GetPosition(parent))
-                               .Select(FromParent)
-                               .Subscribe(p => Point = p);
+            var movingSub = parent.MouseMoveObservable()
+                                  .Where(_ => _isDragging)
+                                  .Select(x => x.GetPosition(parent))
+                                  .Select(FromParent)
+                                  .Subscribe(p => Point = p);
 
             var parentMouseUp = parent.MouseUpObservable()
                                       .Select(_ => false);
@@ -49,25 +48,20 @@ namespace Skeletonization.PresentationLayer.Detection.Views
             var mouseDown = this.MouseDownObservable()
                                 .Select(_ => true);
 
-            _draggingSub = parentMouseUp.Merge(mouseDown)
-                                        .Subscribe(x => _isDragging = x);
+            var draggingSub = parentMouseUp.Merge(mouseDown)
+                                           .Subscribe(x => _isDragging = x);
+
+            _sub = new CompositeDisposable(parentSizeChanged, movingSub, draggingSub);
         }
 
         protected override void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            _movingSub?.Dispose();
-            _draggingSub?.Dispose();
-            _parentSizeChanged?.Dispose();
+            _sub.Dispose();
         }
 
         private static void PointChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not ZonePoint z)
-            {
-                return;
-            }
-
-            z.DrawPoint();
+            (d as ZonePoint).DrawPoint();
         }
 
         private void DrawPoint()

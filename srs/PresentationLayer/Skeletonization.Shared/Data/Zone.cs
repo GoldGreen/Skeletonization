@@ -26,7 +26,7 @@ namespace Skeletonization.PresentationLayer.Shared.Data
         [Reactive] public IEnumerable<Selectable<BodyPart>> BodyParts { get; set; }
         [Reactive] public bool CheckInside { get; set; }
 
-        [Reactive] public ImageSource FrameRoiSource { get; set; }
+        [Reactive] public ImageSource ZoneRoiSource { get; set; }
 
         [Reactive] public string Name { get; set; }
         [Reactive] public string Color { get; set; }
@@ -147,7 +147,7 @@ namespace Skeletonization.PresentationLayer.Shared.Data
                         .Select(p => new Point(ValidateCoordinate(p.X), ValidateCoordinate(p.Y)));
         }
 
-        private double ValidateCoordinate(double c)
+        private static double ValidateCoordinate(double c)
         {
             if (c < 0)
             {
