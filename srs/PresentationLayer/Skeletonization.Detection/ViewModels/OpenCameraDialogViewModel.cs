@@ -1,6 +1,7 @@
 ﻿using Prism.Services.Dialogs;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.DataLayer.Abstractions;
 using System;
@@ -16,7 +17,7 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
         public event Action<IDialogResult> RequestClose;
         public string Title => "Выбор камеры";
 
-        public IVideoDevicesResolver VideoDevicesResolver { get; }
+        public IVideoService VideoService { get; }
 
         [Reactive] public IEnumerable<VideoDeviceInfo> VideoDevices { get; set; }
         [Reactive] public VideoDeviceInfo SelectedDevice { get; set; }
@@ -24,10 +25,10 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
         public ICommand CompleteCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public OpenCameraDialogViewModel(IVideoDevicesResolver videoDevicesResolver)
+        public OpenCameraDialogViewModel(IVideoService videoService)
         {
-            VideoDevicesResolver = videoDevicesResolver;
-            VideoDevices = VideoDevicesResolver.ResolveVideoDevices();
+            VideoService = videoService;
+            VideoDevices = VideoService.GetVideoDevices();
 
             CompleteCommand = ReactiveCommand.Create(() =>
             {

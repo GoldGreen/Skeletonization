@@ -1,18 +1,23 @@
-﻿using Skeletonization.BusinessLayer.Abstractions;
+﻿using Emgu.CV;
+using Skeletonization.BusinessLayer.Abstractions;
+using Skeletonization.CrossfulLayer.Abstractions;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.CrossLayer.Exceptions;
 using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.DataLayer.Implementations.Reading;
+using System.Collections.Generic;
 
 namespace Skeletonization.BusinessLayer.Implementation.Reading
 {
     internal class VideoService : IVideoService
     {
         public IVideoReader VideoReader { get; }
+        public IVideoDevicesResolver VideoDevicesResolver { get; }
 
-        public VideoService(IVideoReader videoReader)
+        public VideoService(IVideoReader videoReader, IVideoDevicesResolver videoDevicesResolver)
         {
             VideoReader = videoReader;
+            VideoDevicesResolver = videoDevicesResolver;
         }
 
         public bool ReversePause()
@@ -23,11 +28,11 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
 
         private void Start(VideoCaptureFabricType fabricType, object arg, IVideoProcessingHandler handler)
         {
-            IVideoCaptureFabric fabric = fabricType switch
+            IFactory<VideoCapture> fabric = fabricType switch
             {
                 VideoCaptureFabricType.File => arg switch
                 {
-                    string filename => new VideoCaptureFileFabric(filename),
+                    string filename => new VideoCaptureFileFactory(filename),
                     _ => throw new VideoCaptureFabricException(fabricType, arg, typeof(string))
                 },
                 VideoCaptureFabricType.Camera => arg switch
@@ -49,6 +54,11 @@ namespace Skeletonization.BusinessLayer.Implementation.Reading
         public void StartCamera(int cameraId, IVideoProcessingHandler handler)
         {
             Start(VideoCaptureFabricType.Camera, cameraId, handler);
+        }
+
+        public IEnumerable<VideoDeviceInfo> GetVideoDevices()
+        {
+            return VideoDevicesResolver.ResolveVideoDevices();
         }
     }
 }

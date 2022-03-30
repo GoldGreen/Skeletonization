@@ -1,13 +1,13 @@
 ﻿using Emgu.CV;
-using Skeletonization.DataLayer.Abstractions;
+using Skeletonization.CrossfulLayer.Abstractions;
 
 namespace Skeletonization.DataLayer.Implementations.Reading
 {
-    public class VideoCaptureFileFabric : IVideoCaptureFabric
+    public class VideoCaptureFileFactory : IFactory<VideoCapture>
     {
         public string FileName { get; }
 
-        public VideoCaptureFileFabric(string fileName)
+        public VideoCaptureFileFactory(string fileName)
         {
             FileName = fileName;
         }

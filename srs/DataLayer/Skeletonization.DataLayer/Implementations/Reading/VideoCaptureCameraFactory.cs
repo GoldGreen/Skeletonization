@@ -1,9 +1,9 @@
 ﻿using Emgu.CV;
-using Skeletonization.DataLayer.Abstractions;
+using Skeletonization.CrossfulLayer.Abstractions;
 
 namespace Skeletonization.DataLayer.Implementations.Reading
 {
-    public class VideoCaptureCameraFactory : IVideoCaptureFabric
+    public class VideoCaptureCameraFactory : IFactory<VideoCapture>
     {
         public int CameraId { get; }
 

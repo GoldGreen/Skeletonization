@@ -1,12 +1,11 @@
-﻿using Skeletonization.CrossLayer.Data;
-using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+﻿using Skeletonization.CrossfulLayer.Abstractions;
+using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
-using System;
 using System.Linq;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 {
-    internal class ZoneFactory : IZoneFactory
+    internal class ZoneFactory : IFactory<Zone>
     {
         private int _id;
 

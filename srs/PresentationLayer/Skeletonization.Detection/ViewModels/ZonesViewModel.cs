@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
+using Skeletonization.CrossfulLayer.Abstractions;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
+using Skeletonization.PresentationLayer.Shared.Data;
 using System.Reactive.Linq;
 using System.Windows.Input;
 
@@ -8,12 +10,12 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
     internal class ZonesViewModel : ReactiveObject
     {
         public IZonesModel Model { get; }
-        public IZoneFactory ZoneFactory { get; }
+        public IFactory<Zone> ZoneFactory { get; }
 
         public ICommand AddZoneCommand { get; }
         public ICommand RemoveZoneCommand { get; }
 
-        public ZonesViewModel(IZonesModel model, IZoneFactory zoneFactory)
+        public ZonesViewModel(IZonesModel model, IFactory<Zone> zoneFactory)
         {
             Model = model;
             ZoneFactory = zoneFactory;
