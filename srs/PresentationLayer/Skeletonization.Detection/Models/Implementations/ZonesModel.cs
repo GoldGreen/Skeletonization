@@ -70,7 +70,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                            .Cashe();
         }
 
-        public void AddingZoneHandler(Zone zone)
+        private void AddingZoneHandler(Zone zone)
         {
             var frameChanged = this.WhenAnyValue(x => x.Frame);
 
@@ -112,7 +112,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             _frameRoiSubs.TryAdd(zone, new CompositeDisposable(sub, humansSub));
         }
 
-        public void RemovingZonehandler(Zone zone)
+        private void RemovingZonehandler(Zone zone)
         {
             if (_frameRoiSubs.TryRemove(zone, out var sub))
             {
