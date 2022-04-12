@@ -6,12 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\DatabaseSending\" />
     <Folder Include="Implementations\TeamsSending\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DirectShowLib" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
   </ItemGroup>
 
   <ItemGroup>

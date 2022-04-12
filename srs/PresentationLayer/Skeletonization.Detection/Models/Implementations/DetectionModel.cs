@@ -42,13 +42,14 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         public DetectionModel(IVideoService videoService,
                               IFinder finder,
                               IDrawer drawer,
-                              IEventAggregator eventAggregator)
+                              IEventAggregator eventAggregator,
+                              DataLayer.Implementations.DatabaseSending.SkeletonizationContext context)
         {
             VideoService = videoService;
             Finder = finder;
             Drawer = drawer;
             EventAggregator = eventAggregator;
-
+            var a = context.Reports.ToList();
             this.WhenAnyValue(x => x.DrawedFrame)
                 .WhereNotNull()
                 .Subscribe(x => FrameSource = x.ToImageSource())

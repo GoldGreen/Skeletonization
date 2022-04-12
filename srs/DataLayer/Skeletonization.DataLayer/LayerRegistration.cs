@@ -1,5 +1,6 @@
 ﻿using Prism.Ioc;
 using Skeletonization.DataLayer.Abstractions;
+using Skeletonization.DataLayer.Implementations.DatabaseSending;
 using Skeletonization.DataLayer.Implementations.Reading;
 
 namespace Skeletonization.DataLayer
@@ -10,6 +11,7 @@ namespace Skeletonization.DataLayer
         {
             container.RegisterSingleton<IVideoReader, VideoReader>();
             container.RegisterSingleton<IVideoDevicesResolver, VideoDevicesResolver>();
+            container.RegisterSingleton<SkeletonizationContext>();
         }
     }
 }
