@@ -16,13 +16,15 @@ namespace Skeletonization.PresentationLayer.Detection
         protected override void RegisterViews(IRegionManager regionManager)
         {
             regionManager.RegisterViewWithRegion<DetectionControl>(GlobalRegions.Detection)
-                         .RegisterViewWithRegion<ZonesControl>(Regions.Zones);
+                         .RegisterViewWithRegion<ZonesControl>(Regions.Zones)
+                         .RegisterViewWithRegion<QueriesControl>(Regions.Queries);
         }
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IDetectionModel, DetectionModel>();
             containerRegistry.RegisterSingleton<IZonesModel, ZonesModel>();
+            containerRegistry.RegisterSingleton<IQueriesModel, QueriesModel>();
 
             containerRegistry.RegisterSingleton<IFactory<Zone>, ZoneFactory>();
 
@@ -30,6 +32,7 @@ namespace Skeletonization.PresentationLayer.Detection
 
             ViewModelLocationProvider.Register<DetectionControl, DetectionViewModel>();
             ViewModelLocationProvider.Register<ZonesControl, ZonesViewModel>();
+            ViewModelLocationProvider.Register<QueriesControl, QueriesViewModel>();
         }
     }
 }

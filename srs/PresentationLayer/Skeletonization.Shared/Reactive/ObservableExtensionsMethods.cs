@@ -56,11 +56,7 @@ namespace Skeletonization.PresentationLayer.Shared.Reactive
 
         public static IObservable<T> ToObservable<T>(this PubSubEvent<T> pubSub)
         {
-            return Observable.FromEvent<T>
-            (
-                act => pubSub.Subscribe(act),
-                act => pubSub.Unsubscribe(act)
-            );
+            return Observable.Create<T>(observer => pubSub.Subscribe(observer.OnNext));
         }
 
         public static IObservable<Unit> ToObservable(this PubSubEvent pubSub)

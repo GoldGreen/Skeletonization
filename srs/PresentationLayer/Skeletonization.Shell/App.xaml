@@ -21,7 +21,6 @@
                 <Setter Property="Padding" Value="7" />
                 <Setter Property="Margin" Value="8" />
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

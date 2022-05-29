@@ -138,6 +138,7 @@
         <ContentControl
             Grid.Row="1"
             Grid.Column="2"
-            Margin="10" />
+            Margin="10"
+            prism:RegionManager.RegionName="{x:Static local:Regions.Queries}" />
     </Grid>
 </UserControl>
