@@ -30,14 +30,14 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
             (
                 x =>
                 {
-                    //if (x.Item1 is null || x.Item2.Contains(x.Item1))
-                    //{
-                    //    EventAggregator.GetEvent<NotificationSended>()
-                    //                   .Publish("Выбранная зона пустая или уже используется запросом");
-                    //    return;
-                    //}
+                    if (x.Item1 is null || x.Item2.QueriesZones.Contains(x.Item1))
+                    {
+                        EventAggregator.GetEvent<NotificationSended>()
+                                       .Publish("Выбранная зона пустая или уже используется запросом");
+                        return;
+                    }
 
-                    //x.QueriesZones.Add(x.SelectedZone);
+                    x.Item2.QueriesZones.Add(x.Item1);
                 }
             );
 
