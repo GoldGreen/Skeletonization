@@ -52,6 +52,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Services
                 Description = report.Description,
                 Path = path
             }).Entity;
+            await DbContext.SaveChangesAsync();
 
             foreach (var human in report.Humans)
             {
@@ -63,6 +64,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Services
                         Pose = DbContext.Poses.First(x => x.Id == 1)
                     }
                 )).Entity;
+                await DbContext.SaveChangesAsync();
 
                 foreach (var point in human.Points)
                 {
@@ -75,6 +77,7 @@ namespace Skeletonization.BusinessLayer.Implementation.Services
                             Id = (int)point.BodyPart + 1,
                             Name = point.BodyPart.ToDescriptionOrString()
                         })).Entity;
+                        await DbContext.SaveChangesAsync();
                     }
 
                     var dbPoint = (await DbContext.Points.AddAsync(new()
@@ -85,15 +88,13 @@ namespace Skeletonization.BusinessLayer.Implementation.Services
                     })).Entity;
 
                     dbHuman.Points.Add(dbPoint);
+                    await DbContext.SaveChangesAsync();
                 }
 
-                DbContext.Humans.Update(dbHuman);
 
                 dbReport.Humans.Add(dbHuman);
+                await DbContext.SaveChangesAsync();
             }
-
-            DbContext.Reports.Update(dbReport);
-            await DbContext.SaveChangesAsync();
         }
     }
 }

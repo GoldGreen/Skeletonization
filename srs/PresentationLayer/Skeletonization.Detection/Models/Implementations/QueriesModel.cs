@@ -51,6 +51,8 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                                                                                          "Описание нарушения",
                                                                                          x.humans,
                                                                                          frame));
+
+                                                      EventAggregator.GetEvent<NotificationSended>().Publish("Отчёт о нарушении отправлен!");
                                                   });
 
                                await Task.WhenAll(tasks);
