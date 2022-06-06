@@ -32,11 +32,14 @@ namespace Skeletonization.PresentationLayer.Shared.Data
         [Reactive] public string Name { get; set; }
         [Reactive] public string Color { get; set; }
         [Reactive] public double Opacity { get; set; }
+        public Guid Guid { get; }
 
         private double _currentMillisecond;
 
-        public Zone(double startX, double startY, double width, double height)
+        public Zone(double startX, double startY, double width, double height, Guid guid)
         {
+            Guid = guid;
+
             LeftTop = new(startX, startY);
             RightTop = new(startX + width, startY);
             RightBot = new(startX + width, startY + height);

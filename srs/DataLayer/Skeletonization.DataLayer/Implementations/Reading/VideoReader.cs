@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Microsoft.Extensions.Logging;
 using Skeletonization.CrossfulLayer.Abstractions;
 using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.DataLayer.Data;
@@ -48,10 +49,17 @@ namespace Skeletonization.DataLayer.Implementations.Reading
 
                     Mat frame = new();
 
-                    if (!_videoCapture.Read(frame))
+                    try
                     {
-                        break;
+                        if (!_videoCapture.Read(frame))
+                        {
+                            break;
+                        }
                     }
+                    catch (Exception)
+                    {
+                    }
+                 
 
                     await changingCallback?.Invoke(new FrameInfo(frame, frameNum++));
                 }

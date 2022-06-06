@@ -1,6 +1,7 @@
 ﻿using Skeletonization.CrossfulLayer.Abstractions;
 using Skeletonization.CrossLayer.Data;
 using Skeletonization.PresentationLayer.Shared.Data;
+using System;
 using System.Linq;
 
 namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
@@ -11,11 +12,11 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
         public Zone Create()
         {
-            return new(0.4, 0.4, 0.1, 0.1)
+            return new(0.4, 0.4, 0.1, 0.1, Guid.NewGuid())
             {
                 Name = $"Зона {_id++}",
                 Color = "Red",
-                Opacity = 0.5,
+                Opacity = 0.65,
                 MinCount = 0,
                 Delay = 0,
                 CheckInside = true,

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Skeletonization.PresentationLayer.Shared.Converters;assembly=Skeletonization.Shared"
     xmlns:local="clr-namespace:Skeletonization.PresentationLayer.Detection.Views"
-    >
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style TargetType="{x:Type local:ZonesMapper}">
         <Setter Property="Template">
             <Setter.Value>
@@ -38,6 +38,131 @@
                         Fill="{TemplateBinding Fill}"
                         Opacity="{TemplateBinding Opacity}"
                         Points="{TemplateBinding Points}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:QueryControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:QueryControl}">
+                    <ControlTemplate.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Margin" Value="4" />
+                            <Setter Property="md:TextFieldAssist.HasClearButton" Value="True" />
+                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Margin" Value="4,4,10,4" />
+                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                    <Border
+                        Margin="0,0,0,10"
+                        BorderBrush="DarkSlateBlue"
+                        BorderThickness="3">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Query.IsDangerours, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard Storyboard.TargetProperty="BorderBrush.Color">
+                                                    <ColorAnimation
+                                                        RepeatBehavior="Forever"
+                                                        To="Red"
+                                                        Duration="0:0:0.8" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard Storyboard.TargetProperty="BorderBrush.Color">
+                                                    <ColorAnimation To="DarkSlateBlue" Duration="0:0:0.1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+
+                            <Button
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Command="{Binding RemoveQueryCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                CommandParameter="{Binding Query, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <md:PackIcon Kind="DeleteCircle" />
+                            </Button>
+                            <StackPanel>
+                                <Label x:Name="proxyCommand" DataContext="{Binding RemoveZoneCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Инвертированность:" />
+                                    <ToggleButton IsChecked="{Binding Query.IsInverted, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                </StackPanel>
+
+                                <WrapPanel>
+                                    <TextBlock Text="Источник:" />
+                                    <ToggleButton Name="checkTogle" IsChecked="{Binding Query.CheckInZone, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <ComboBox
+                                        MinWidth="100"
+                                        IsEnabled="{Binding IsChecked, ElementName=checkTogle}"
+                                        ItemsSource="{Binding Query.Zones, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        SelectedItem="{Binding Query.CheckingZone, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </WrapPanel>
+                                <TextBlock Text="Зоны запроса:" />
+                                <ItemsControl Margin="4" ItemsSource="{Binding Query.Zones, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+                                                <Button
+                                                    VerticalAlignment="Center"
+                                                    Command="{Binding DataContext, ElementName=proxyCommand}"
+                                                    CommandParameter="{Binding}">
+                                                    <md:PackIcon Kind="DeleteCircle" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <WrapPanel>
+                                    <TextBlock Text="Добавление зоны" />
+                                    <ComboBox
+                                        MinWidth="100"
+                                        ItemsSource="{Binding AddingZones, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        SelectedItem="{Binding SelectedZone, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Command="{Binding AddZoneCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <md:PackIcon Kind="AddCircle" />
+                                    </Button>
+                                </WrapPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Отправлять отчёт:" />
+                                    <ToggleButton IsChecked="{Binding Query.SendReport, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

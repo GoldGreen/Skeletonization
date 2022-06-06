@@ -31,7 +31,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         private IEnumerable<Human> _humansCashe;
 
         [Reactive] private Mat Frame { get; set; }
-        private ConcurrentDictionary<Zone, IDisposable> _frameRoiSubs = new();
+        private readonly ConcurrentDictionary<Zone, IDisposable> _frameRoiSubs = new();
 
         public ZonesModel(IEventAggregator eventAggregator)
         {

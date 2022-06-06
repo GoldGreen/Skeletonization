@@ -13,99 +13,36 @@
     d:DesignHeight="500.467"
     d:DesignWidth="350"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Margin" Value="4" />
-            <Setter Property="md:TextFieldAssist.HasClearButton" Value="True" />
-        </Style>
-        <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Margin" Value="4,4,10,4" />
-        </Style>
-    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button
+        <StackPanel
             Grid.Row="0"
-            HorizontalAlignment="Right"
-            Command="{Binding AddQueryCommand}">
-            <md:PackIcon Kind="AddCircle" />
-        </Button>
+            Margin="8"
+            FlowDirection="RightToLeft"
+            Orientation="Horizontal">
+            <Button
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding AddQueryCommand}">
+                <md:PackIcon Kind="AddCircle" />
+            </Button>
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text=":Добавить запрос" />
+        </StackPanel>
         <ScrollViewer Grid.Row="1">
             <ItemsControl ItemsSource="{Binding Model.Queries}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border
-                            Margin="0,0,0,10"
-                            BorderBrush="{StaticResource MaterialDesignBody}"
-                            BorderThickness="3">
-                            <StackPanel x:Name="queryPanel">
-                                <Button
-                                    HorizontalAlignment="Right"
-                                    Command="{Binding DataContext.RemoveQueryCommand, ElementName=parent}"
-                                    CommandParameter="{Binding}">
-                                    <md:PackIcon Kind="DeleteCircle" />
-                                </Button>
-                                <WrapPanel>
-                                    <TextBlock Text="Инвертрование:" />
-                                    <ToggleButton IsChecked="{Binding IsInverted}" />
-                                </WrapPanel>
-                                <WrapPanel>
-                                    <TextBlock Text="Поиск в зоне:" />
-                                    <ToggleButton Name="checkTogle" IsChecked="{Binding CheckInZone}" />
-                                    <ComboBox
-                                        MinWidth="100"
-                                        IsEnabled="{Binding IsChecked, ElementName=checkTogle}"
-                                        ItemsSource="{Binding QueriesZones}"
-                                        SelectedItem="{Binding CheckingZone}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" />
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </WrapPanel>
-                                <TextBlock Text="Зоны запроса:" />
-                                <ItemsControl ItemsSource="{Binding QueriesZones}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <WrapPanel x:Name="zonePanel">
-                                                <TextBlock Text="{Binding Name}" />
-                                                <Button Command="{Binding DataContext.RemoveZoneFromQueryCommand, ElementName=parent}">
-                                                    <md:PackIcon Kind="AddCall" />
-                                                    <Button.CommandParameter>
-                                                        <MultiBinding Converter="{sh:QueryZoneConverter}">
-                                                            <Binding />
-                                                            <Binding ElementName="queryPanel" Path="DataContext" />
-                                                        </MultiBinding>
-                                                    </Button.CommandParameter>
-                                                </Button>
-                                            </WrapPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                                <WrapPanel>
-                                    <TextBlock Text="Добавление зоны" />
-                                    <ComboBox
-                                        MinWidth="100"
-                                        ItemsSource="{Binding DataContext.Zones, ElementName=parent}"
-                                        SelectedItem="{Binding SelectedZone}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" />
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    <Button Command="{Binding DataContext.AddZoneToQueryCommand, ElementName=parent}" CommandParameter="{Binding}">
-                                        <md:PackIcon Kind="AddCall" />
-                                    </Button>
-                                </WrapPanel>
-                            </StackPanel>
-                        </Border>
+                        <local:QueryControl
+                            Query="{Binding}"
+                            RemoveQueryCommand="{Binding DataContext.RemoveQueryCommand, ElementName=parent}"
+                            Zones="{Binding DataContext.Zones, ElementName=parent}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

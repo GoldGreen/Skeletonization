@@ -2,6 +2,7 @@
 using Prism.Events;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Serilog;
 using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.BusinessLayer.Data;
 using Skeletonization.DataLayer.Data;
@@ -27,7 +28,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         public IFinder Finder { get; }
         public IDrawer Drawer { get; }
         public IEventAggregator EventAggregator { get; set; }
-
+        public ILogger Logger { get; }
         [Reactive] public int FrameNum { get; set; }
         [Reactive] public long FrameHandlingTime { get; set; }
         [Reactive] public string VideoDescription { get; set; }
@@ -43,13 +44,13 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                               IFinder finder,
                               IDrawer drawer,
                               IEventAggregator eventAggregator,
-                              DataLayer.Implementations.DatabaseSending.SkeletonizationContext context)
+                              ILogger logger)
         {
             VideoService = videoService;
             Finder = finder;
             Drawer = drawer;
             EventAggregator = eventAggregator;
-            var a = context.Reports.ToList();
+            Logger = logger;
             this.WhenAnyValue(x => x.DrawedFrame)
                 .WhereNotNull()
                 .Subscribe(x => FrameSource = x.ToImageSource())
@@ -68,42 +69,68 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
 
         public void StartVideoFromCamera(int cameraId)
         {
-            VideoService.StartCamera(cameraId, this);
-            VideoDescription = $"Камера: {cameraId}";
+            try
+            {
+                Logger.Information("Открытие видео с камеры {id}", cameraId);
+                VideoService.StartCamera(cameraId, this);
+                VideoDescription = $"Камера: {cameraId}";
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Ошибка открытия видео с камеры {id}", cameraId);
+                EventAggregator.GetEvent<NotificationSended>().Publish(e.Message);
+            }
         }
 
         public void StartVideoFromFile(string fileName)
         {
-            VideoService.StartFile(fileName, this);
-            VideoDescription = $"Файл: {fileName}";
+            try
+            {
+                Logger.Information("Открытие видеофайла: {path}", fileName);
+                VideoService.StartFile(fileName, this);
+                VideoDescription = $"Файл: {fileName}";
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Ошибка открытия видеофайла: {path}", fileName);
+                EventAggregator.GetEvent<NotificationSended>().Publish(e.Message);
+            }
         }
 
         public Task HandleFrame(FrameInfo frame)
         {
             return Application.Current?.Dispatcher?.Invoke(async () =>
             {
-                var st = Stopwatch.StartNew();
-                var humans = await Finder.Find(frame.Mat);
-
-                Frame?.Dispose();
-                Frame = null;
-                DrawedFrame?.Dispose();
-                DrawedFrame = null;
-
-                Frame = frame.Mat;
-                var copy = frame.Mat.Clone();
-
-                if (humans.Count > 0)
+                try
                 {
-                    Drawer.Draw(copy, humans);
+                    var st = Stopwatch.StartNew();
+                    var humans = await Finder.Find(frame.Mat);
+
+                    Frame?.Dispose();
+                    Frame = null;
+                    DrawedFrame?.Dispose();
+                    DrawedFrame = null;
+
+                    Frame = frame.Mat;
+                    var copy = frame.Mat.Clone();
+
+                    if (humans.Count > 0)
+                    {
+                        Drawer.Draw(copy, humans);
+                    }
+                    DrawedFrame = copy;
+
+                    Humans = humans.Select(x => Convert(x, Frame))
+                                   .ToList();
+
+                    FrameNum = frame.Num;
+                    FrameHandlingTime = st.ElapsedMilliseconds;
                 }
-                DrawedFrame = copy;
-
-                Humans = humans.Select(x => Convert(x, Frame))
-                               .ToList();
-
-                FrameNum = frame.Num;
-                FrameHandlingTime = st.ElapsedMilliseconds;
+                catch (Exception e)
+                {
+                    Logger.Error("Ошибка обработки кадра {num} {mes}", frame.Num, e.Message);
+                    EventAggregator.GetEvent<NotificationSended>().Publish(e.Message);
+                }
             });
         }
 

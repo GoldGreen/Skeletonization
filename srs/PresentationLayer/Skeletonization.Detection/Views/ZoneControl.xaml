@@ -16,12 +16,12 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="TextBox">
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="Margin" Value="4" />
             <Setter Property="md:TextFieldAssist.HasClearButton" Value="True" />
         </Style>
         <Style BasedOn="{StaticResource MaterialDesignBody1TextBlock}" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="Margin" Value="4,4,10,4" />
         </Style>
     </UserControl.Resources>

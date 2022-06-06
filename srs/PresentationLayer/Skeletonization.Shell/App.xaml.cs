@@ -1,7 +1,9 @@
-﻿using Prism.Ioc;
+﻿using Microsoft.Extensions.Configuration;
+using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Unity;
+using Serilog;
 using Skeletonization.BusinessLayer;
 using Skeletonization.DataLayer;
 using Skeletonization.Humans;
@@ -23,8 +25,16 @@ namespace Skeletonization.PresentationLayer.Shell
         {
             ViewModelLocationProvider.Register<ShellWindow, ShellViewModel>();
 
-            containerRegistry.AddBusinesLayer(); 
+            containerRegistry.AddBusinesLayer();
             containerRegistry.AddDataLayer();
+
+            var configuration = Container.Resolve<IConfiguration>();
+
+            Log.Logger = new LoggerConfiguration()
+                            .ReadFrom.Configuration(configuration)
+                            .CreateLogger();
+
+            containerRegistry.RegisterInstance(Log.Logger);
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
