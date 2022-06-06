@@ -1,4 +1,4 @@
-﻿using Skeletonization.PresentationLayer.Shared.Extensions;
+﻿using Skeletonization.CrossLayer.Extensions;
 using System;
 using System.Globalization;
 

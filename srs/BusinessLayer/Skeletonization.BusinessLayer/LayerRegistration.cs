@@ -18,11 +18,12 @@ namespace Skeletonization.BusinessLayer
             container.RegisterNet();
 
             container.RegisterSingleton<IDetector, Detector>()
-                     .RegisterSingleton<IPreparer, Preparer>()
-                     .RegisterSingleton<IDrawer, Drawer>()
-                     .RegisterSingleton<IHumanConverter, HumanConverter>()
-                     .RegisterSingleton<IFinder, Finder>()
-                     .RegisterSingleton<IVideoService, VideoService>();
+                     .RegisterScoped<IPreparer, Preparer>()
+                     .RegisterScoped<IDrawer, Drawer>()
+                     .RegisterScoped<IHumanConverter, HumanConverter>()
+                     .RegisterScoped<IFinder, Finder>()
+                     .RegisterScoped<IVideoService, VideoService>()
+                     .RegisterScoped<IReportService, ReportService>();
         }
 
         private static void RegisterNet(this IContainerRegistry container)

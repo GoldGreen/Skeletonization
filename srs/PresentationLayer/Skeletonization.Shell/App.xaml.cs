@@ -6,8 +6,10 @@ using Prism.Unity;
 using Serilog;
 using Skeletonization.BusinessLayer;
 using Skeletonization.DataLayer;
+using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.Humans;
 using Skeletonization.PresentationLayer.Detection;
+using Skeletonization.PresentationLayer.Shell.UserConfiguration;
 using Skeletonization.Settings;
 using Skeletonization.Zones;
 using System.Windows;
@@ -35,6 +37,7 @@ namespace Skeletonization.PresentationLayer.Shell
                             .CreateLogger();
 
             containerRegistry.RegisterInstance(Log.Logger);
+            containerRegistry.RegisterScoped<IEmailConfiguration, EmailConfiguration>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

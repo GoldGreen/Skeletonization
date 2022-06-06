@@ -1,10 +1,19 @@
-﻿using System.Drawing;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 
 namespace Skeletonization.CrossLayer.Extensions
 {
     public static class PointsExtensionsMethods
     {
+        public static string ToDescriptionOrString(this Enum value)
+        {
+            var fi = value.GetType().GetField(value.ToString());
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+        }
+
         public static bool IsEmpty(this Point point)
         {
             return point.X == -1 && point.Y == -1;

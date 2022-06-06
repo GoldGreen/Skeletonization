@@ -1,6 +1,7 @@
 ﻿using Emgu.CV;
 using Prism.Events;
 using ReactiveUI;
+using Skeletonization.BusinessLayer.Abstractions;
 using Skeletonization.BusinessLayer.Data;
 using Skeletonization.PresentationLayer.Detection.Models.Abstractions;
 using Skeletonization.PresentationLayer.Shared.Data;
@@ -20,12 +21,13 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
     {
         public ObservableCollection<Query> Queries { get; } = new();
         public IEventAggregator EventAggregator { get; }
+        public IReportService ReportService { get; }
         public Mat Frame { get; set; }
 
-        public QueriesModel(IEventAggregator eventAggregator)
+        public QueriesModel(IEventAggregator eventAggregator, IReportService reportService)
         {
             EventAggregator = eventAggregator;
-
+            ReportService = reportService;
 
             EventAggregator.GetEvent<FrameChanged>()
                            .ToObservable()
@@ -45,7 +47,10 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
                                                   .Select(async x =>
                                                   {
                                                       using var frame = Frame.Clone();
-                                                      await Task.CompletedTask;
+                                                      await ReportService.SendReport(new("Нарушение!",
+                                                                                         "Описание нарушения",
+                                                                                         x.humans,
+                                                                                         frame));
                                                   });
 
                                await Task.WhenAll(tasks);

@@ -2,6 +2,7 @@
 using Skeletonization.DataLayer.Abstractions;
 using Skeletonization.DataLayer.Implementations.DatabaseSending;
 using Skeletonization.DataLayer.Implementations.Reading;
+using Skeletonization.DataLayer.Implementations.TeamsSending;
 
 namespace Skeletonization.DataLayer
 {
@@ -12,6 +13,7 @@ namespace Skeletonization.DataLayer
             container.RegisterSingleton<IVideoReader, VideoReader>();
             container.RegisterSingleton<IVideoDevicesResolver, VideoDevicesResolver>();
             container.RegisterSingleton<SkeletonizationContext>();
+            container.RegisterScoped<IEmailSender, EmailSender>();
         }
     }
 }

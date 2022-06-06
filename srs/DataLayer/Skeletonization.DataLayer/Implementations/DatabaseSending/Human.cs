@@ -11,7 +11,7 @@ namespace Skeletonization.DataLayer.Implementations.DatabaseSending
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Point> Points { get; set; }
+        public ICollection<Point> Points { get; set; } = new List<Point>();
         public Pose Pose { get; set; }
     }
 }
