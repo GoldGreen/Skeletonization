@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Skeletonization.CrossfulLayer.Abstractions;
 
 namespace Skeletonization.BusinessLayer.Implementation.Services
