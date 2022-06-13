@@ -12,6 +12,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Abstractions
         int FrameNum { get; set; }
         long FrameHandlingTime { get; set; }
         string VideoDescription { get; set; }
+        bool Paused { get; set; }
 
         void StartVideoFromCamera(int cameraId);
         void StartVideoFromFile(string fileName);

@@ -31,7 +31,7 @@
             <Setter Property="Height" Value="28" />
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20,20,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
@@ -67,7 +67,7 @@
             md:HintAssist.Hint="Пароль">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PasswordChanged">
-                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding Password, ElementName=passwordBox}" />
+                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding Password, ElementName=passwordBox, Mode=OneWay}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </PasswordBox>

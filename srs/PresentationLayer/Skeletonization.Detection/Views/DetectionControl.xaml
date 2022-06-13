@@ -77,59 +77,102 @@
             Grid.Column="0"
             BorderBrush="{StaticResource MaterialDesignBody}"
             BorderThickness="3">
-            <Image
-                x:Name="image"
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Source="{Binding Model.FrameSource}"
-                Stretch="Uniform" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Image
+                    x:Name="image"
+                    Grid.Row="0"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="{Binding Model.FrameSource}"
+                    Stretch="Uniform" />
+                <Canvas
+                    Grid.Row="0"
+                    Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}"
+                    Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}"
+                    Margin="{Binding Margin, ElementName=image, Mode=OneWay}"
+                    HorizontalAlignment="{Binding HorizontalAlignment, ElementName=image, Mode=OneWay}"
+                    VerticalAlignment="{Binding VerticalAlignment, ElementName=image, Mode=OneWay}"
+                    Background="Transparent">
+                    <Canvas.Resources>
+                        <Style TargetType="local:ZonePoint">
+                            <Setter Property="Width" Value="25" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
+                        </Style>
+                        <Style TargetType="local:ZonePolygon">
+                            <Setter Property="Opacity" Value="{Binding Opacity}" />
+                            <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
+                        </Style>
+                    </Canvas.Resources>
+                    <local:ZonesMapper
+                        x:Name="mapper"
+                        SelectedZone="{Binding SelectedZone, Mode=TwoWay}"
+                        Zones="{Binding Zones}">
+                        <local:ZonesMapper.DataTemplates>
+                            <DataTemplate>
+                                <local:ZonePolygon d:DataContext="{d:DesignInstance Type=shD:Zone}" Zone="{Binding}" />
+                            </DataTemplate>
+                            <DataTemplate>
+                                <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                            </DataTemplate>
+                            <DataTemplate>
+                                <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                            </DataTemplate>
+                            <DataTemplate>
+                                <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                            </DataTemplate>
+                            <DataTemplate>
+                                <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </local:ZonesMapper.DataTemplates>
+                    </local:ZonesMapper>
+                </Canvas>
+                <Button
+                    Grid.Row="1"
+                    Width="60"
+                    Height="60"
+                    Margin="0"
+                    Padding="0"
+                    VerticalAlignment="Center"
+                    Command="{Binding UnpauseCommand}">
+                    <Button.Resources>
+                        <Style TargetType="md:PackIcon">
+                            <Setter Property="Width" Value="60" />
+                            <Setter Property="Height" Value="60" />
+                        </Style>
+                    </Button.Resources>
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource MaterialDesignFlatDarkButton}" TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Model.Paused}" Value="False">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <md:PackIcon Kind="PauseCircle" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Model.Paused}" Value="True">
+                                    <DataTrigger.Setters>
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <md:PackIcon Kind="PlayBox" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger.Setters>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
         </Border>
-        <Canvas
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="{Binding ActualWidth, ElementName=image, Mode=OneWay}"
-            Height="{Binding ActualHeight, ElementName=image, Mode=OneWay}"
-            Margin="{Binding Margin, ElementName=image, Mode=OneWay}"
-            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=image, Mode=OneWay}"
-            VerticalAlignment="{Binding VerticalAlignment, ElementName=image, Mode=OneWay}"
-            Background="Transparent">
-            <Canvas.Resources>
-                <Style TargetType="local:ZonePoint">
-                    <Setter Property="Width" Value="25" />
-                    <Setter Property="Height" Value="25" />
-                    <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
-                </Style>
-                <Style TargetType="local:ZonePolygon">
-                    <Setter Property="Opacity" Value="{Binding Opacity}" />
-                    <Setter Property="Fill" Value="{Binding Color, Converter={sh:ColorConverter}}" />
-                </Style>
-            </Canvas.Resources>
-            <local:ZonesMapper
-                x:Name="mapper"
-                SelectedZone="{Binding SelectedZone, Mode=TwoWay}"
-                Zones="{Binding Zones}">
-                <local:ZonesMapper.DataTemplates>
-                    <DataTemplate>
-                        <local:ZonePolygon d:DataContext="{d:DesignInstance Type=shD:Zone}" Zone="{Binding}" />
-                    </DataTemplate>
-                    <DataTemplate>
-                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
-                    </DataTemplate>
-                    <DataTemplate>
-                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightTop, Converter={sh:PointConverter}, Mode=TwoWay}" />
-                    </DataTemplate>
-                    <DataTemplate>
-                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding RightBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
-                    </DataTemplate>
-                    <DataTemplate>
-                        <local:ZonePoint d:DataContext="{d:DesignInstance Type=shD:Zone}" Point="{Binding LeftBot, Converter={sh:PointConverter}, Mode=TwoWay}" />
-                    </DataTemplate>
-                </local:ZonesMapper.DataTemplates>
-            </local:ZonesMapper>
-        </Canvas>
         <ContentControl
             Grid.Row="1"
             Grid.Column="1"

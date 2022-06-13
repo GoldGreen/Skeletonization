@@ -36,6 +36,7 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
         [Reactive] public Mat Frame { get; set; }
         [Reactive] public Mat DrawedFrame { get; set; }
         [Reactive] public ImageSource FrameSource { get; set; }
+        [Reactive] public bool Paused { get; set; } = false;
 
         [Reactive] public IEnumerable<HumanWithRoi> Humans { get; set; }
 
@@ -103,6 +104,11 @@ namespace Skeletonization.PresentationLayer.Detection.Models.Implementations
             {
                 try
                 {
+                    while (Paused)
+                    {
+                        await Task.Delay(100);
+                    }
+
                     var st = Stopwatch.StartNew();
                     var humans = await Finder.Find(frame.Mat);
 

@@ -22,6 +22,7 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
 
         public ICommand StartVideoFromFileCommand { get; }
         public ICommand StartVideoFromCameraCommand { get; }
+        public ICommand UnpauseCommand { get; }
 
         public DetectionViewModel(IDetectionModel model,
                                   IEventAggregator eventAggregator,
@@ -63,6 +64,13 @@ namespace Skeletonization.PresentationLayer.Detection.ViewModels
                     Model.StartVideoFromCamera(device.Id);
                 }
             });
+
+            UnpauseCommand = ReactiveCommand.Create
+            (
+                () => Model.Paused = !Model.Paused, 
+                Model.WhenAnyValue(x => x.Frame)
+                     .Select(x => x != null)
+            );
         }
     }
 }
